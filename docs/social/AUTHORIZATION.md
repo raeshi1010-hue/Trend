@@ -29,7 +29,7 @@
 
 ## 论坛单帖
 
-DIYnot逐帖读取DiscussionForumPosting JSON-LD的author/datePublished/interactionStatistic；缺少结构化数据时只回退首帖article的data-author与time。论坛会员累计Messages或Reaction score绝不当作帖子互动。无帖子级互动数据时为空；保留RSS日期另存rssDate，不冒充首发。每条保存单帖采集时间和字段验证状态。
+DIYnot逐帖读取DiscussionForumPosting JSON-LD的author/datePublished/interactionStatistic；缺少结构化数据时只回退首帖article的data-author与time。论坛会员累计Messages或Reaction score绝不当作帖子互动。另从Building主题列表按线程ID提取Replies/Views；K/M取整数保留Display文本，不转换为精确数。无帖子级互动数据时为空；保留RSS日期另存rssDate，不冒充首发。每条保存单帖采集时间和字段验证状态。
 
 测试覆盖无配置不访问API、错误不泄露密钥、搜索与详情组合、Reddit bearer请求、会员指标隔离与首发/RSS日期区分。凭据尚未配置时只能称接口已实现和模拟响应测试通过，不能声称官方API实测成功。
 
