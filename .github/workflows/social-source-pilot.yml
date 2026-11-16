@@ -28,8 +28,15 @@ jobs:
           node-version: '22'
       - name: Check collector syntax
         run: node --check scripts/social-pilot.mjs
+      - name: Test metadata parsing and API contracts
+        run: node --test scripts/social-adapters.test.mjs
       - name: Probe public sources without credentials
         run: node scripts/social-pilot.mjs
+        env:
+          YOUTUBE_API_KEY: ${{ github.event_name == 'workflow_dispatch' && secrets.YOUTUBE_API_KEY || '' }}
+          REDDIT_ACCESS_TOKEN: ${{ github.event_name == 'workflow_dispatch' && secrets.REDDIT_ACCESS_TOKEN || '' }}
+          REDDIT_USER_AGENT: ${{ github.event_name == 'workflow_dispatch' && secrets.REDDIT_USER_AGENT || '' }}
+          REDDIT_API_APPROVED: ${{ github.event_name == 'workflow_dispatch' && vars.REDDIT_API_APPROVED || '' }}
       - name: Validate output and publish run summary
         run: node scripts/social-validate.mjs
       - name: Upload dashboard and evidence records
