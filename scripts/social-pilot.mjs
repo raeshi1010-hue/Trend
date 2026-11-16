@@ -13,7 +13,7 @@ const sources=[
  ['LinkedIn','https://www.linkedin.com/search/results/content/?keywords=construction','项目、采购和从业者讨论；搜索可能需登录','无通用BGM字段'],
  ['Houzz','https://www.houzz.com/discussions','家装、自建房、设计讨论','一般不适用'],
  ['Screwfix Community','https://community.screwfix.com/forums/builders-talk.23/index.rss','英国施工论坛RSS：标题、日期、讨论直链；互动另查','不适用'],
- ['DIYnot','https://www.diynot.com/diy/forums/building.23/index.rss','英国装修施工论坛RSS；可用性需试采','不适用'],
+ ['DIYnot','https://www.diynot.com/diy/forums/building/index.rss','英国装修施工论坛RSS；可用性需试采','不适用'],
  ['ContractorTalk','https://www.contractortalk.com/forums/','承包商论坛：讨论、回复及浏览量需页面核验','不适用'],
  ['SkyscraperCity','https://www.skyscrapercity.com/forums/','项目、城市建设及中东工程讨论','一般不适用']
 ].map(([name,url,fields,bgm])=>({name,url,fields,bgm}));
@@ -31,7 +31,10 @@ const attempts=await Promise.all(sources.map(async source=>{
   } else if(r.ok&&/<rss[\s>]|<feed[\s>]/i.test(body)){
    for(const m of body.matchAll(/<item[\s>]([\s\S]*?)<\/item>/gi)){const title=tag(m[1],'title'),url=tag(m[1],'link');if(title&&/^https:\/\//.test(url))items.push({title,url,publishedAt:tag(m[1],'pubDate')||null,metrics:{},market:'市场未确认',tags:null,bgm:null});}
   }
-  const status=!r.ok?'HTTP '+r.status:items.length?'已提取结构化原帖候选':/captcha|challenge|log in to|login required|access denied/i.test(body)?'访问受限/需人工确认':'页面可达，尚未提取原帖';
+  const feedTitle=tag(body.split(/<item[\s>]/i)[0],'title');
+  const sourceMismatch=source.name==='DIYnot'&&items.length>0&&!/building/i.test(feedTitle);
+  if(sourceMismatch)items.length=0;
+  const status=!r.ok?'HTTP '+r.status:sourceMismatch?'RSS分区不匹配，已排除':items.length?'已提取结构化原帖候选':/just a moment|access denied/i.test(plain(body.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||''))||/\/(login|uas\/login)(\/|\?)/i.test(r.url)?'访问受限/需人工确认':'页面可达，尚未提取原帖';
   return {...source,observedAt,httpStatus:r.status,status,items:items.slice(0,10),bytes:Buffer.byteLength(body),pageTitle:plain(body.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||''),finalUrl:r.url};
  }catch(e){return {...source,observedAt,status:e.name==='TimeoutError'?'请求超时':'网络请求失败',error:e.cause?.code||e.name,items:[]};}
 }));

@@ -20,6 +20,6 @@ for(const source of data.attempts){
 }
 for(const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g))new Function(m[1]);
 const rows=data.attempts.map(s=>`| ${s.name} | ${s.status} | ${s.httpStatus??'—'} | ${s.items.length} |`);
-const summary=['# 社媒公开来源试采',`观察时间：${data.observedAt}`,'页面可达与候选提取不等于日期、市场、热度或BGM核验通过。',`运行环境：${data.runtime?.platform??'unknown'} / Node ${data.runtime?.node??'unknown'}`,'| 来源 | 状态 | HTTP | 原帖候选数 |','|---|---|---|---|',...rows,'','下载本次运行的 artifact，解压后打开 index.html 查看看板。工作流通过仅代表试采和结构验证完成，不能视为采集覆盖成功。'].join('\n');
+const summary=['# 社媒公开来源试采',`观察时间：${data.observedAt}`,'页面可达与候选提取不等于日期、市场、热度或BGM核验通过。',`运行环境：${data.runtime?.platform??'unknown'} / Node ${data.runtime?.node??'unknown'}`,'| 来源 | 状态 | HTTP | 原帖候选数 |','|---|---|---|---|',...rows,'','下载本次运行的 artifact，解压后打开 docs/social/index.html 查看看板。工作流通过仅代表试采和结构验证完成，不能视为采集覆盖成功。'].join('\n');
 if(process.env.GITHUB_STEP_SUMMARY)await fs.appendFile(process.env.GITHUB_STEP_SUMMARY,summary+'\n');
 console.log(summary);
