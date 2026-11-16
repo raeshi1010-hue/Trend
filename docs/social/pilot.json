@@ -1,0 +1,135 @@
+{
+  "observedAt": "2026-11-16T02:09:58.064Z",
+  "scope": "公开路径一次性试采；页面可达不代表原帖、市场和热度核验通过",
+  "attempts": [
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/explore/tags/construction/",
+      "fields": "视频、图片、标签；公开页面未必返回原帖",
+      "bgm": "音频名称/链接需单帖读取",
+      "observedAt": "2026-11-16T02:09:37.957Z",
+      "status": "网络请求失败",
+      "error": "UND_ERR_CONNECT_TIMEOUT",
+      "items": []
+    },
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/search/posts/?q=construction",
+      "fields": "公共主页/群组；搜索可能需登录",
+      "bgm": "Reels音频需单帖核验",
+      "observedAt": "2026-11-16T02:09:38.037Z",
+      "status": "网络请求失败",
+      "error": "UND_ERR_CONNECT_TIMEOUT",
+      "items": []
+    },
+    {
+      "name": "X",
+      "url": "https://x.com/search?q=construction&f=live",
+      "fields": "帖子、转帖、回复；搜索可能需授权",
+      "bgm": "无通用BGM字段",
+      "observedAt": "2026-11-16T02:09:38.038Z",
+      "status": "网络请求失败",
+      "error": "ECONNRESET",
+      "items": []
+    },
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=construction+saudi",
+      "fields": "视频标题、视频ID；统计优先Data API",
+      "bgm": "音乐署名不等于热门音频榜",
+      "observedAt": "2026-11-16T02:09:38.039Z",
+      "status": "网络请求失败",
+      "error": "UND_ERR_CONNECT_TIMEOUT",
+      "items": []
+    },
+    {
+      "name": "TikTok",
+      "url": "https://www.tiktok.com/tag/construction",
+      "fields": "视频、话题；Research API需要资格及授权",
+      "bgm": "music_id不等于音频名称或授权",
+      "observedAt": "2026-11-16T02:09:38.040Z",
+      "status": "网络请求失败",
+      "error": "ECONNRESET",
+      "items": []
+    },
+    {
+      "name": "Reddit",
+      "url": "https://www.reddit.com/r/Construction/new.json?limit=10",
+      "fields": "帖子、分数、评论数；接口可能限制匿名访问",
+      "bgm": "不适用一般文字帖",
+      "observedAt": "2026-11-16T02:09:38.041Z",
+      "status": "网络请求失败",
+      "error": "UND_ERR_CONNECT_TIMEOUT",
+      "items": []
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/search/results/content/?keywords=construction",
+      "fields": "项目、采购和从业者讨论；搜索可能需登录",
+      "bgm": "无通用BGM字段",
+      "observedAt": "2026-11-16T02:09:38.042Z",
+      "httpStatus": 451,
+      "status": "HTTP 451",
+      "items": [],
+      "bytes": 0,
+      "pageTitle": "",
+      "finalUrl": "https://www.linkedin.cn/incareer/home"
+    },
+    {
+      "name": "Houzz",
+      "url": "https://www.houzz.com/discussions",
+      "fields": "家装、自建房、设计讨论",
+      "bgm": "一般不适用",
+      "observedAt": "2026-11-16T02:09:38.043Z",
+      "httpStatus": 403,
+      "status": "HTTP 403",
+      "items": [],
+      "bytes": 13257,
+      "pageTitle": "Houzz - Access Restricted",
+      "finalUrl": "https://www.houzz.com/discussions"
+    },
+    {
+      "name": "Screwfix Community",
+      "url": "https://community.screwfix.com/forums/builders-talk.23/index.rss",
+      "fields": "英国施工论坛RSS：标题、日期、讨论直链；互动另查",
+      "bgm": "不适用",
+      "observedAt": "2026-11-16T02:09:38.044Z",
+      "status": "网络请求失败",
+      "error": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+      "items": []
+    },
+    {
+      "name": "DIYnot",
+      "url": "https://www.diynot.com/diy/forums/building.23/index.rss",
+      "fields": "英国装修施工论坛RSS；可用性需试采",
+      "bgm": "不适用",
+      "observedAt": "2026-11-16T02:09:38.045Z",
+      "httpStatus": 403,
+      "status": "HTTP 403",
+      "items": [],
+      "bytes": 5682,
+      "pageTitle": "Just a moment...",
+      "finalUrl": "https://www.diynot.com/diy/forums/building.23/index.rss"
+    },
+    {
+      "name": "ContractorTalk",
+      "url": "https://www.contractortalk.com/forums/",
+      "fields": "承包商论坛：讨论、回复及浏览量需页面核验",
+      "bgm": "不适用",
+      "observedAt": "2026-11-16T02:09:38.046Z",
+      "status": "请求超时",
+      "error": "TimeoutError",
+      "items": []
+    },
+    {
+      "name": "SkyscraperCity",
+      "url": "https://www.skyscrapercity.com/forums/",
+      "fields": "项目、城市建设及中东工程讨论",
+      "bgm": "一般不适用",
+      "observedAt": "2026-11-16T02:09:38.047Z",
+      "status": "请求超时",
+      "error": "TimeoutError",
+      "items": []
+    }
+  ]
+}
