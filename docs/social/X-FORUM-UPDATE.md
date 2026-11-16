@@ -18,4 +18,8 @@ ContractorTalk、SkyscraperCity从可读论坛主页发现最多4条同站主题
 
 ## 验证
 
-14项本地测试通过，覆盖X未启用/未授权零请求、作者展开、市场/BGM不推断、论坛同源链接与重复过滤。GitHub真实试采结果从Actions的运行摘要和artifact读取。无X凭据时不能称官方接口实测通过；浏览器视觉验证尚未完成。日周报调度尚未开启。
+15项本地及GitHub测试通过，覆盖X未启用/未授权零请求、作者展开、市场/BGM不推断、论坛同源链接、重复与导航/规则帖过滤。运行43796044996完成并上传看板及配置包。无X凭据时不能称官方接口实测通过；浏览器视觉验证尚未完成。日周报调度尚未开启。
+
+首轮扩展采样曾提取到ContractorTalk的时间锚点、规则帖与历史帖；已经修复，优先使用详情页h1标题并排除超过7天的已知首发帖子。最终复测中ContractorTalk和SkyscraperCity请求超时，未形成有效新增内容，必须继续解决来源稳定性。DIYnot现有候选保留，以pilot.json本期实际结果为准；不把代码支持写成新增来源已稳定接通。
+
+[本期运行与下载入口](https://github.com/raeshi1010-hue/Trend/actions/runs/43796044996)。下载artifact后打开docs/social/index.html或configuration.html。
