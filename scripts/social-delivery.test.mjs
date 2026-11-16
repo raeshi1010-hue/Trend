@@ -16,3 +16,11 @@ test('weekly boundary uses Monday midnight Shanghai while daily keeps seven-day 
  assert.equal(buildDelivery(source([item]),{}, {now,kind:'weekly'}).records.length,0);
  assert.equal(buildDelivery(source([item]),{}, {now,kind:'daily'}).records.length,1);
 });
+test('foreign-only delivery excludes domestic and unknown sources even when records are fresh',()=>{
+ const p=source([item]);
+ for(const name of ['抖音','微博','今日头条','unknown'])p.attempts.push({name,observedAt:new Date(now).toISOString(),items:[{...item,url:'https://example.com/'+encodeURIComponent(name)}]});
+ const d=buildDelivery(p,{}, {now});
+ assert.deepEqual(d.records.map(r=>r.platform),['YouTube']);
+ assert.equal(d.excluded.length,4);
+ assert.equal(d.coverage.length,1);
+});

@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 
 const DAY=86400000;
 export const platforms=['TikTok','YouTube','Instagram','Facebook','LinkedIn','Reddit'];
+const allowedSources=new Set([...platforms,'X','Houzz','Screwfix Community','DIYnot','ContractorTalk','SkyscraperCity','Pinterest','ArchDaily','Behance','The Construction Index']);
 const markets=['欧洲','北美','中东'];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function windowFor(now,kind){
@@ -18,6 +19,10 @@ export function buildDelivery(pilot,extra,{now=Date.now(),kind='daily'}={}){
  for(const s of [...(pilot.attempts||[]),...(extra.results||[])])if(!sources.has(s.name))sources.set(s.name,{...s,observedAt:s.observedAt||extra.observedAt});
  const records=[],excluded=[],seen=new Set(),coverage=[];
  for(const source of sources.values()){
+  if(!allowedSources.has(source.name)){
+   for(const item of source.items||[])excluded.push({platform:source.name,url:safeUrl(item.url),reason:'不在用户指定的国外来源范围内'});
+   continue;
+  }
   let kept=0;
   const observed=Date.parse(source.observedAt),fresh=Number.isFinite(observed)&&observed>=now-DAY&&observed<=now+300000;
   for(const item of source.items||[]){
@@ -62,4 +67,3 @@ export async function generate(root=path.resolve(path.dirname(fileURLToPath(impo
  return files;
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))await generate();
-
