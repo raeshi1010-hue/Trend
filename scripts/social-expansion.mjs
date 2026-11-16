@@ -14,7 +14,7 @@ export function discoverThreads(html,base){
  const root=new URL(base),seen=new Set(),items=[];
  for(const m of html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){
   try{const u=new URL(m[1].replaceAll('&amp;','&'),root);if(u.origin!==root.origin||!/^\/threads\/[^/]+\.\d+\/$/.test(u.pathname))continue;
-   const title=m[2].replace(/<[^>]*>/g,'').trim();if(!title||/^(latest|last|new|\d+)$/i.test(title)||seen.has(u.pathname))continue;
+   const title=m[2].replace(/<[^>]*>/g,'').trim();if(!title||/^(latest|last|new|\d+|.*\bago|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d.+)$/i.test(title)||/community rules|pros.only|terms|privacy|welcome/i.test(title)||seen.has(u.pathname))continue;
    seen.add(u.pathname);u.search='';u.hash='';items.push({title,url:u.href,author:null,publishedAt:null,metrics:{},market:'市场未确认',tags:null,bgm:null,sourceKind:'forum_discovery'});
   }catch{}
  }
@@ -24,10 +24,12 @@ export async function forumSample(source,html,request=fetch){
  const items=discoverThreads(html,source.url);
  for(const item of items){
   try{const r=await request(item.url,{signal:AbortSignal.timeout(10000),redirect:'error'});if(!r.ok)throw Error('HTTP_'+r.status);
-   const parsed=parseForum(await r.text());Object.assign(item,parsed,{metricsObservedAt:new Date().toISOString(),detail:{status:parsed.author&&parsed.publishedAt?'首帖元数据已提取':'候选原帖，元数据仍有缺口'}});
+   const body=await r.text(),parsed=parseForum(body);
+   const heading=body.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]?.replace(/<[^>]*>/g,'').trim();
+   Object.assign(item,parsed,{...(heading?{title:heading}:{}),metricsObservedAt:new Date().toISOString(),detail:{status:parsed.author&&parsed.publishedAt?'首帖元数据已提取':'候选原帖，元数据仍有缺口'}});
   }catch{item.detail={status:'发现原帖链接，单帖访问失败'};}
  }
- return items;
+ return items.filter(i=>!/community rules|pros.only|terms|privacy|welcome/i.test(i.title)&&(!i.publishedAt||Date.parse(i.publishedAt)>=Date.now()-7*86400000));
 }
 export function classify(title){
  const rules=[['工程与使用端',/waterproof|cladding|concrete|insulation|construction|roof|window|floor|防水|施工|混凝土|عزل|بناء/i],['上游资源端',/quarry|mining|aggregate|pigment|砂石|矿山/i],['流通渠道端',/wholesale|distributor|warehouse|logistics|批发|物流/i],['技术检测服务端',/laboratory|certification|bim|检测|认证/i],['监管行业配套',/regulation|association|exhibition|recycling|招标|展会/i],['终端散户',/homeowner|renovation|diy|装修|自建房/i]];

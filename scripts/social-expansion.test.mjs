@@ -12,3 +12,6 @@ test('thread discovery rejects offsite and normalizes duplicates',()=>{
  const r=discoverThreads('<a href="https://evil.test/threads/t.1/">evil</a><a href="/threads/t.1/?x=1">Title</a><a href="/threads/t.1/">duplicate</a><a href="javascript:alert(1)">bad</a>','https://www.contractortalk.com/forums/');assert.equal(r.length,1);assert.equal(r[0].url,'https://www.contractortalk.com/threads/t.1/');
 });
 test('classification remains conservative for unknown title',()=>{assert.equal(classify('Unknown topic'),'待分类');assert.equal(classify('Wall waterproofing'),'工程与使用端');});
+test('forum discovery rejects timestamp anchors and community rules',()=>{
+ const r=discoverThreads('<a href="/threads/rules.1/">community rules</a><a href="/threads/job.2/">4h ago</a><a href="/threads/job.2/">Concrete job</a>','https://www.contractortalk.com/forums/');assert.equal(r.length,1);assert.equal(r[0].title,'Concrete job');
+});
