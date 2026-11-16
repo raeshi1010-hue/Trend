@@ -6,6 +6,7 @@ on:
     paths:
       - 'scripts/social-*.mjs'
       - 'config/social-monitoring-requirements.md'
+      - 'config/social-platforms.json'
       - '.github/workflows/social-source-pilot.yml'
 
 permissions:
@@ -29,9 +30,11 @@ jobs:
       - name: Check collector syntax
         run: node --check scripts/social-pilot.mjs
       - name: Test metadata parsing and API contracts
-        run: node --test scripts/social-adapters.test.mjs
+        run: node --test scripts/social-adapters.test.mjs scripts/social-config.test.mjs
       - name: Probe public sources without credentials
-        run: node scripts/social-pilot.mjs
+        run: |
+          node scripts/social-pilot.mjs
+          node scripts/social-config.mjs
         env:
           YOUTUBE_API_KEY: ${{ github.event_name == 'workflow_dispatch' && secrets.YOUTUBE_API_KEY || '' }}
           REDDIT_ACCESS_TOKEN: ${{ github.event_name == 'workflow_dispatch' && secrets.REDDIT_ACCESS_TOKEN || '' }}
@@ -48,6 +51,11 @@ jobs:
             docs/social/index.html
             docs/social/pilot.json
             docs/social/SOURCES.md
+            docs/social/AUTHORIZATION.md
+            docs/social/PLATFORM-SETUP.md
+            docs/social/configuration.html
+            docs/social/configuration.json
+            config/social-platforms.json
             config/social-monitoring-requirements.md
           if-no-files-found: error
           retention-days: 14

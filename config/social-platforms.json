@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "platforms": [
+    {"name":"Instagram","implementation":"planned","route":"先确定专业账号授权读取与全网发现的边界；未实现Graph适配器","requirements":[],"action":"先确定要监测的专业账号/话题，核实对应Meta产品和审核；暂不索取令牌","fields":"原帖及互动字段待所选接口确认","bgm":"音频名称、地区热度和商业授权均待验证","documentation":"https://developers.facebook.com/docs/instagram/platform/instagram-api/"},
+    {"name":"Facebook","implementation":"planned","route":"指定公共主页及经审核的内容访问；不承诺私密群组或全站搜索","requirements":[],"action":"先列公共主页与目标数据范围，再确认App Review和读取权限","fields":"帖子、时间、互动字段依权限确认","bgm":"Reels音频另行验证","documentation":"https://developers.facebook.com/docs/pages-api/"},
+    {"name":"X","implementation":"planned","route":"官方Recent Search，需确认开发者访问及实际费用；未实现适配器","requirements":[],"action":"先确认搜索权限、额度及费用，再实现Bearer接入；不自动付费","fields":"原帖、作者、created_at及public_metrics，按获批范围","bgm":"未验证通用音频榜","documentation":"https://docs.x.com/x-api/posts/search-recent-posts"},
+    {"name":"YouTube","implementation":"adapter","route":"公开视频关键词搜索与详情，单关键词样本","requirements":[{"name":"YOUTUBE_API_KEY","kind":"secret"}],"action":"启用YouTube Data API v3；配置API key后手动运行","fields":"标题、频道、首发、标签、播放/点赞/评论（可提供时）","bgm":"当前接口不提供BGM热榜或商用授权","documentation":"https://developers.google.com/youtube/data/guides/authentication"},
+    {"name":"TikTok","implementation":"planned","route":"Display API限授权用户的视频；Research接口需另核资格；未实现适配器","requirements":[],"action":"先确定授权账号视频还是全市场趋势；Display授权不能代替全网监测","fields":"Display元数据；研究接口字段不能假定商用可用","bgm":"music_id、音频名、热度和使用许可分开核验","documentation":"https://developers.tiktok.com/docs/en/display-api-overview"},
+    {"name":"Reddit","implementation":"adapter","route":"获批应用的只读OAuth，r/Construction样本","requirements":[{"name":"REDDIT_ACCESS_TOKEN","kind":"secret"},{"name":"REDDIT_USER_AGENT","kind":"secret"},{"name":"REDDIT_API_APPROVED","kind":"variable","equals":"true"}],"action":"批准当前用途后配置read范围令牌；需解决续期和删除同步再长期运行","fields":"作者、首发、score、评论、upvote_ratio","bgm":"文字讨论不适用","documentation":"https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki"},
+    {"name":"LinkedIn","implementation":"planned","route":"Community Management面向获批的主页/组织管理场景；未实现适配器","requirements":[],"action":"先明确主页和管理员授权、申请产品访问；不假定普通登录可全网搜索","fields":"组织帖子、反应和分析依获批范围","bgm":"未验证音频字段","documentation":"https://learn.microsoft.com/en-us/linkedin/marketing/community-management/community-management-overview"},
+    {"name":"Houzz","implementation":"discovery","route":"公共讨论页发现，未实现帖子解析","requirements":[],"action":"验证公开讨论直链、访问规则和可提取字段后再扩展","fields":"原帖、作者、日期和回复待验证","bgm":"通常不适用","documentation":"https://www.houzz.com/discussions"},
+    {"name":"Screwfix Community","implementation":"discovery","route":"RSS候选；上次TLS证书链失败","requirements":[],"action":"确认有效RSS和证书链，不关闭TLS验证","fields":"RSS及单帖字段待验证","bgm":"不适用","documentation":"https://community.screwfix.com/"},
+    {"name":"DIYnot","implementation":"public","route":"Building RSS、首帖元数据与主题列表","requirements":[],"action":"无需账号；持续验证字段、频率和地区归属","fields":"10条实测：原文、作者、首发、回复及浏览","bgm":"文字讨论不适用","documentation":"https://www.diynot.com/diy/forums/building/"},
+    {"name":"ContractorTalk","implementation":"discovery","route":"公共论坛主页可达；未实现帖子解析","requirements":[],"action":"选定施工工种分区并验证原帖结构","fields":"回复/浏览、作者、首发待验证","bgm":"通常不适用","documentation":"https://www.contractortalk.com/forums/"},
+    {"name":"SkyscraperCity","implementation":"discovery","route":"公共论坛主页可达；未实现帖子解析","requirements":[],"action":"选定中东/欧美国家项目分区，验证原帖与指标","fields":"项目讨论、作者、首发和互动待验证","bgm":"通常不适用","documentation":"https://www.skyscrapercity.com/forums/"}
+  ]
+}
