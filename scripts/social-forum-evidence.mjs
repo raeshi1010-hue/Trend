@@ -19,7 +19,23 @@ export function threadStatistics(html,url){
   }
  }
  const id=new URL(url).pathname.match(/\.(\d+)\/?$/)?.[1];
- return {...(parseForumListing(html).get(id)||{}),...metrics};
+ return {...(parseForumListing(html).get(id)||{}),...forumRow(html,url).metrics,...metrics};
+}
+export function forumRow(html,url){
+ const id=new URL(url).pathname.match(/\.(\d+)\/?$/)?.[1];
+ const starts=[...html.matchAll(/<div\b[^>]*class=["'][^"']*structItem--thread[^"']*["'][^>]*>/gi)];
+ const row=starts.map((m,i)=>html.slice(m.index,starts[i+1]?.index??html.length)).find(s=>new RegExp('href=["\'][^"\']*threads/[^"\']*\\.'+id+'/?["\']','i').test(s));
+ if(!row)return {metrics:{},author:null,publishedAt:null};
+ const metrics={};
+ for(const [key,qid,label] of [['replies','reply','Replies'],['views','view','Views']]){
+  const attrs=row.match(new RegExp('<(?:div|span)\\b[^>]*qid=["\']thread-item-'+qid+'-count["\'][^>]*>','i'))?.[0]||'';
+  const raw=attrs.match(/\btitle=["']([^"']+)["']/i)?.[1]?.replace(new RegExp('\\s*'+label+'$','i'),'').trim();
+  if(raw&&/^\d[\d,]*$/.test(raw))metrics[key]=Number(raw.replaceAll(',',''));
+  else if(raw)metrics[key+'Display']=raw;
+ }
+ const author=row.match(/<a\b[^>]*qid=["']thread-item-username["'][^>]*>([\s\S]*?)<\/a>/i)?.[1]?.replace(/<[^>]*>/g,'').trim()||null;
+ const date=row.match(/<li\b[^>]*class=["'][^"']*structItem-startDate[^"']*["'][^>]*>([\s\S]*?)<\/li>/i)?.[1]?.match(/datetime=["']([^"']+)["']/i)?.[1];
+ return {metrics,author,publishedAt:date&&Number.isFinite(Date.parse(date))?new Date(date).toISOString():null};
 }
 export function forumCategory(html,url){
  const origin=new URL(url).origin,links=[];

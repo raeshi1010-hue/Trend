@@ -1,5 +1,6 @@
 export function assessItem(item,now=Date.now()){
  const gaps=[];const when=Date.parse(item.publishedAt);
+ if(item.metadataConflict)gaps.push('单帖与列表首帖字段冲突');
  if(!item.author)gaps.push('作者未取得');
  if(!Number.isFinite(when))gaps.push('首发时间未取得');
  else if(when>now+300000||when<now-7*86400000)gaps.push('不在最近7天首发窗口');

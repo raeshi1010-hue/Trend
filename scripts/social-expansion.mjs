@@ -1,6 +1,6 @@
 import {jsonRequest,parseForum} from './social-adapters.mjs';
 import {publicText} from './social-public-http.mjs';
-import {threadStatistics,forumCategory,locationEvidence} from './social-forum-evidence.mjs';
+import {threadStatistics,forumCategory,locationEvidence,forumRow} from './social-forum-evidence.mjs';
 import {assessItem,metricStructure} from './social-quality.mjs';
 export async function xSearch(env=process.env,request=fetch){
  if(env.X_API_ENABLED!=='true')return {status:'X接口已实现，待确认访问资格与调用费用',items:[]};
@@ -40,7 +40,11 @@ export async function forumSample(source,html,request=fetch){
    if(category&&!Object.keys(item.metrics).length){
     if(!categoryCache.has(category))categoryCache.set(category,await publicText(category,{request,timeoutMs:12000}));
     const listing=categoryCache.get(category);item.metricAttempts=listing.attempts;
-    if(listing.ok){item.metricEvidence={url:category,observedAt:listing.observedAt,structure:metricStructure(listing.body,item.url)};const found=threadStatistics(listing.body,item.url);if(Object.keys(found).length){item.metrics=found;item.metricsSource=category;}}
+    if(listing.ok){item.metricEvidence={url:category,observedAt:listing.observedAt,structure:metricStructure(listing.body,item.url)};const found=threadStatistics(listing.body,item.url);if(Object.keys(found).length){item.metrics=found;item.metricsSource=category;item.metricsObservedAt=listing.observedAt;item.metricEvidence.structure.preview=null;}
+     const row=forumRow(listing.body,item.url);item.listingMetadata={author:row.author,publishedAt:row.publishedAt,source:category};
+     if((item.author&&row.author&&item.author!==row.author)||(item.publishedAt&&row.publishedAt&&item.publishedAt!==row.publishedAt))item.metadataConflict=true;
+     if(!item.author)item.author=row.author;if(!item.publishedAt)item.publishedAt=row.publishedAt;
+    }
    }
    item.detail.metricsStatus=Object.keys(item.metrics).length?'帖子级指标已提取':'来源未提供可核验的帖子级指标';
   }catch{item.detail={status:'发现原帖链接，单帖访问失败'};}

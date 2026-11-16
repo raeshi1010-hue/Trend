@@ -1,6 +1,11 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {threadStatistics,forumCategory,locationEvidence} from './social-forum-evidence.mjs';
+import {threadStatistics,forumCategory,locationEvidence,forumRow} from './social-forum-evidence.mjs';
+test('observed qid/title layout reads exact thread counts and first-post metadata',()=>{
+ const html='<div class="structItem structItem--thread"><a href="/threads/t.1/">Topic</a><a qid="thread-item-username">Author</a><li class="structItem-startDate"><time datetime="2026-11-10T20:49:38-0500"></time></li><div title="0 Replies" class="reply-count" qid="thread-item-reply-count"></div><div title="331 Views" qid="thread-item-view-count"></div>';
+ assert.deepEqual(forumRow(html,'https://f.test/threads/t.1/'),{author:'Author',publishedAt:'2026-11-11T01:49:38.000Z',metrics:{replies:0,views:331}});
+ assert.deepEqual(forumRow(html,'https://f.test/threads/other.2/').metrics,{});
+});
 const ld=x=>'<script type="application/ld+json">'+JSON.stringify(x)+'</script>';
 test('nested linked data metrics match the actual thread, not a suggested post',()=>{
  const html=ld({'@type':'WebPage',mainEntity:{'@type':'DiscussionForumPosting',url:'https://f.test/threads/t.1/',commentCount:5},related:{'@type':'DiscussionForumPosting',url:'https://f.test/threads/other.2/',commentCount:999}});
