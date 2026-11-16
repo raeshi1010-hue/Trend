@@ -30,7 +30,7 @@ jobs:
       - name: Check collector syntax
         run: node --check scripts/social-pilot.mjs
       - name: Test metadata parsing and API contracts
-        run: node --test scripts/social-adapters.test.mjs scripts/social-config.test.mjs scripts/social-expansion.test.mjs
+        run: node --test scripts/social-adapters.test.mjs scripts/social-config.test.mjs scripts/social-expansion.test.mjs scripts/social-public-http.test.mjs
       - name: Probe public sources without credentials
         run: |
           node scripts/social-pilot.mjs
@@ -56,6 +56,7 @@ jobs:
             docs/social/AUTHORIZATION.md
             docs/social/PLATFORM-SETUP.md
             docs/social/X-FORUM-UPDATE.md
+            docs/social/RELIABILITY.md
             docs/social/configuration.html
             docs/social/configuration.json
             config/social-platforms.json

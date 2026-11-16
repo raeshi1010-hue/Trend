@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {enrichForum,youtube,reddit,parseForumListing} from './social-adapters.mjs';
-import {xSearch,forumSample,enhanceDashboard} from './social-expansion.mjs';
+import {xSearch,forumSample,enhanceDashboard,stableForumSource} from './social-expansion.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const out=path.join(root,'docs/social');
 const sources=[
@@ -27,6 +27,7 @@ const attempts=await Promise.all(sources.map(async source=>{
  if(source.name==='YouTube')return {...source,observedAt,...await youtube()};
  if(source.name==='Reddit')return {...source,observedAt,...await reddit()};
  if(source.name==='X')return {...source,observedAt,...await xSearch()};
+ if(['ContractorTalk','SkyscraperCity'].includes(source.name))return {observedAt,...await stableForumSource(source)};
  try{
   const r=await fetch(source.url,{signal:AbortSignal.timeout(20000),headers:{'User-Agent':'Trend-source-pilot/1.0 (public source availability test)'}});
   const body=(await r.text()).slice(0,1500000);

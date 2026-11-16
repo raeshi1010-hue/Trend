@@ -1,4 +1,5 @@
 import {jsonRequest,parseForum} from './social-adapters.mjs';
+import {publicText} from './social-public-http.mjs';
 export async function xSearch(env=process.env,request=fetch){
  if(env.X_API_ENABLED!=='true')return {status:'X接口已实现，待确认访问资格与调用费用',items:[]};
  if(!env.X_BEARER_TOKEN)return {status:'未配置 X_BEARER_TOKEN',items:[]};
@@ -23,19 +24,39 @@ export function discoverThreads(html,base){
 export async function forumSample(source,html,request=fetch){
  const items=discoverThreads(html,source.url);
  for(const item of items){
-  try{const r=await request(item.url,{signal:AbortSignal.timeout(10000),redirect:'error'});if(!r.ok)throw Error('HTTP_'+r.status);
-   const body=await r.text(),parsed=parseForum(body);
+  try{const read=await publicText(item.url,{request,timeoutMs:12000});
+   item.accessAttempts=read.attempts;
+   if(!read.ok){item.detail={status:'发现原帖链接，单帖访问失败',failureKind:read.kind};continue;}
+   const body=read.body,parsed=parseForum(body);
    const heading=body.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]?.replace(/<[^>]*>/g,'').trim();
    Object.assign(item,parsed,{...(heading?{title:heading}:{}),metricsObservedAt:new Date().toISOString(),detail:{status:parsed.author&&parsed.publishedAt?'首帖元数据已提取':'候选原帖，元数据仍有缺口'}});
   }catch{item.detail={status:'发现原帖链接，单帖访问失败'};}
  }
  return items.filter(i=>!/community rules|pros.only|terms|privacy|welcome/i.test(i.title)&&(!i.publishedAt||Date.parse(i.publishedAt)>=Date.now()-7*86400000));
 }
+export async function stableForumSource(source,options={}){
+ const paths=[source.url,new URL('/',source.url).href],accessAttempts=[];
+ for(const url of [...new Set(paths)]){
+  const read=await publicText(url,options);accessAttempts.push(...read.attempts);
+  if(!read.ok){
+   if(['access_restricted','rate_limited','certificate_error'].includes(read.kind))return {...source,status:'公开来源受阻：'+read.kind,items:[],accessAttempts};
+   continue;
+  }
+  const items=await forumSample(source,read.body,options.request||fetch);
+  if(items.length)return {...source,status:'公开论坛候选（非热榜）',items,accessAttempts,selectedSource:url,observedAt:read.observedAt};
+ }
+ return {...source,status:'主备路径未取得近期有效主题',items:[],accessAttempts};
+}
 export function classify(title){
  const rules=[['工程与使用端',/waterproof|cladding|concrete|insulation|construction|roof|window|floor|防水|施工|混凝土|عزل|بناء/i],['上游资源端',/quarry|mining|aggregate|pigment|砂石|矿山/i],['流通渠道端',/wholesale|distributor|warehouse|logistics|批发|物流/i],['技术检测服务端',/laboratory|certification|bim|检测|认证/i],['监管行业配套',/regulation|association|exhibition|recycling|招标|展会/i],['终端散户',/homeowner|renovation|diy|装修|自建房/i]];
  return rules.find(([,r])=>r.test(title||''))?.[0]||'待分类';
 }
 export function enhanceDashboard(html,attempts){
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ for(const source of attempts)if(source.accessAttempts?.length){
+  const trace='<details><summary>公开路径尝试记录（'+source.accessAttempts.length+'次）</summary>'+source.accessAttempts.map(a=>'<p>'+esc(a.observedAt)+' · '+esc(a.url)+' · '+esc(a.httpStatus??a.errorCode??a.kind)+' · '+esc(a.kind)+' · '+esc(a.durationMs)+'ms</p>').join('')+'</details>';
+  html=html.replace('<h2>'+esc(source.name)+'</h2>','<h2>'+esc(source.name)+'</h2>'+trace);
+ }
  const items=attempts.flatMap(s=>s.items);let n=0;
  html=html.replaceAll('<section lang="und" dir="auto">',()=>{const i=items[n++];const market=['欧洲','北美','中东'].includes(i?.market)?i.market:'市场未确认';return '<section lang="und" dir="auto" data-market="'+market+'" data-industry="'+classify(i?.title)+'">'});
  const options=['全部行业','工程与使用端','上游资源端','流通渠道端','技术检测服务端','监管行业配套','终端散户','待分类'].map(v=>'<option>'+v+'</option>').join('');
