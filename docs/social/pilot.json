@@ -1,11 +1,11 @@
 {
-  "observedAt": "2026-11-16T03:51:17.764Z",
+  "observedAt": "2026-11-16T03:55:43.570Z",
   "runtime": {
     "platform": "linux",
     "node": "v22.23.4",
     "githubActions": true,
-    "runId": "43800581996",
-    "commit": "80b6ddad547474010bebf8679ea6935390f74f74"
+    "runId": "43800995800",
+    "commit": "43ada0e2d4cc7339be09a4c0617f99b263f63e64"
   },
   "scope": "公开路径一次性试采；页面可达不代表原帖、市场和热度核验通过",
   "attempts": [
@@ -14,11 +14,11 @@
       "url": "https://www.instagram.com/explore/tags/construction/",
       "fields": "视频、图片、标签；公开页面未必返回原帖",
       "bgm": "音频名称/链接需单帖读取",
-      "observedAt": "2026-11-16T03:51:13.910Z",
+      "observedAt": "2026-11-16T03:55:39.698Z",
       "httpStatus": 200,
       "status": "页面可达，尚未提取原帖",
       "items": [],
-      "bytes": 583420,
+      "bytes": 584286,
       "pageTitle": "Construction • 193M reels on Instagram",
       "finalUrl": "https://www.instagram.com/popular/construction/?utm_source=explore_tag"
     },
@@ -27,7 +27,7 @@
       "url": "https://www.facebook.com/search/posts/?q=construction",
       "fields": "公共主页/群组；搜索可能需登录",
       "bgm": "Reels音频需单帖核验",
-      "observedAt": "2026-11-16T03:51:14.035Z",
+      "observedAt": "2026-11-16T03:55:39.743Z",
       "httpStatus": 404,
       "status": "HTTP 404",
       "items": [],
@@ -40,7 +40,7 @@
       "url": "https://x.com/search?q=construction&f=live",
       "fields": "帖子、转帖、回复；搜索可能需授权",
       "bgm": "无通用BGM字段",
-      "observedAt": "2026-11-16T03:51:14.037Z",
+      "observedAt": "2026-11-16T03:55:39.745Z",
       "status": "X接口已实现，待确认访问资格与调用费用",
       "items": []
     },
@@ -49,7 +49,7 @@
       "url": "https://www.youtube.com/results?search_query=construction+saudi",
       "fields": "视频标题、视频ID；统计优先Data API",
       "bgm": "音乐署名不等于热门音频榜",
-      "observedAt": "2026-11-16T03:51:14.037Z",
+      "observedAt": "2026-11-16T03:55:39.745Z",
       "status": "未配置 YOUTUBE_API_KEY",
       "items": []
     },
@@ -58,11 +58,11 @@
       "url": "https://www.tiktok.com/tag/construction",
       "fields": "视频、话题；Research API需要资格及授权",
       "bgm": "music_id不等于音频名称或授权",
-      "observedAt": "2026-11-16T03:51:14.037Z",
+      "observedAt": "2026-11-16T03:55:39.745Z",
       "httpStatus": 200,
       "status": "页面可达，尚未提取原帖",
       "items": [],
-      "bytes": 365926,
+      "bytes": 365316,
       "pageTitle": "TikTok - Make Your Day",
       "finalUrl": "https://www.tiktok.com/tag/construction"
     },
@@ -71,7 +71,7 @@
       "url": "https://www.reddit.com/r/Construction/new.json?limit=10",
       "fields": "帖子、分数、评论数；接口可能限制匿名访问",
       "bgm": "不适用一般文字帖",
-      "observedAt": "2026-11-16T03:51:14.038Z",
+      "observedAt": "2026-11-16T03:55:39.746Z",
       "status": "待确认Reddit已批准本用途的API访问",
       "items": []
     },
@@ -80,7 +80,7 @@
       "url": "https://www.linkedin.com/search/results/content/?keywords=construction",
       "fields": "项目、采购和从业者讨论；搜索可能需登录",
       "bgm": "无通用BGM字段",
-      "observedAt": "2026-11-16T03:51:14.038Z",
+      "observedAt": "2026-11-16T03:55:39.746Z",
       "httpStatus": 403,
       "status": "HTTP 403",
       "items": [],
@@ -93,11 +93,11 @@
       "url": "https://www.houzz.com/discussions",
       "fields": "家装、自建房、设计讨论",
       "bgm": "一般不适用",
-      "observedAt": "2026-11-16T03:51:14.039Z",
+      "observedAt": "2026-11-16T03:55:39.747Z",
       "httpStatus": 200,
       "status": "页面可达，尚未提取原帖",
       "items": [],
-      "bytes": 890710,
+      "bytes": 869609,
       "pageTitle": "Join Home &amp; Garden Discussions on Houzz | Houzz",
       "finalUrl": "https://www.houzz.com/discussions"
     },
@@ -106,7 +106,7 @@
       "url": "https://community.screwfix.com/forums/builders-talk.23/index.rss",
       "fields": "英国施工论坛RSS：标题、日期、讨论直链；互动另查",
       "bgm": "不适用",
-      "observedAt": "2026-11-16T03:51:14.040Z",
+      "observedAt": "2026-11-16T03:55:39.749Z",
       "status": "网络请求失败",
       "error": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
       "items": []
@@ -116,7 +116,7 @@
       "url": "https://www.diynot.com/diy/forums/building/index.rss",
       "fields": "英国装修施工论坛RSS；可用性需试采",
       "bgm": "不适用",
-      "observedAt": "2026-11-16T03:51:14.041Z",
+      "observedAt": "2026-11-16T03:55:39.750Z",
       "httpStatus": 200,
       "status": "已提取结构化原帖候选",
       "items": [
@@ -134,10 +134,10 @@
           "metricsSource": "Building论坛主题列表",
           "rssDate": "Sun, 15 Nov 2026 22:51:32 +0000",
           "author": "housebuildinghun",
-          "metricsObservedAt": "2026-11-16T03:51:16.036Z",
+          "metricsObservedAt": "2026-11-16T03:55:41.269Z",
           "detail": {
             "status": "首帖作者与时间已提取",
-            "observedAt": "2026-11-16T03:51:16.036Z",
+            "observedAt": "2026-11-16T03:55:41.269Z",
             "metadataSource": "首帖 article data-author/time"
           },
           "verification": {
@@ -166,10 +166,10 @@
           "metricsSource": "Building论坛主题列表",
           "rssDate": "Sun, 15 Nov 2026 21:47:09 +0000",
           "author": "Coaster",
-          "metricsObservedAt": "2026-11-16T03:51:16.233Z",
+          "metricsObservedAt": "2026-11-16T03:55:41.461Z",
           "detail": {
             "status": "首帖作者与时间已提取",
-            "observedAt": "2026-11-16T03:51:16.233Z",
+            "observedAt": "2026-11-16T03:55:41.461Z",
             "metadataSource": "首帖 article data-author/time"
           },
           "verification": {
@@ -198,10 +198,10 @@
           "metricsSource": "Building论坛主题列表",
           "rssDate": "Sun, 15 Nov 2026 19:46:13 +0000",
           "author": "honestworker",
-          "metricsObservedAt": "2026-11-16T03:51:16.402Z",
+          "metricsObservedAt": "2026-11-16T03:55:41.672Z",
           "detail": {
             "status": "首帖作者与时间已提取",
-            "observedAt": "2026-11-16T03:51:16.402Z",
+            "observedAt": "2026-11-16T03:55:41.672Z",
             "metadataSource": "首帖 article data-author/time"
           },
           "verification": {
@@ -230,10 +230,10 @@
           "metricsSource": "Building论坛主题列表",
           "rssDate": "Sun, 15 Nov 2026 14:14:27 +0000",
           "author": "jprb7",
-          "metricsObservedAt": "2026-11-16T03:51:16.580Z",
+          "metricsObservedAt": "2026-11-16T03:55:41.865Z",
           "detail": {
             "status": "首帖作者与时间已提取",
-            "observedAt": "2026-11-16T03:51:16.580Z",
+            "observedAt": "2026-11-16T03:55:41.865Z",
             "metadataSource": "首帖 article data-author/time"
           },
           "verification": {
@@ -262,10 +262,10 @@
           "metricsSource": "Building论坛主题列表",
           "rssDate": "Sun, 15 Nov 2026 12:31:14 +0000",
           "author": "yjones",
-          "metricsObservedAt": "2026-11-16T03:51:16.738Z",
+          "metricsObservedAt": "2026-11-16T03:55:42.033Z",
           "detail": {
             "status": "首帖作者与时间已提取",
-            "observedAt": "2026-11-16T03:51:16.738Z",
+            "observedAt": "2026-11-16T03:55:42.033Z",
             "metadataSource": "首帖 article data-author/time"
           },
           "verification": {
@@ -294,10 +294,10 @@
           "metricsSource": "Building论坛主题列表",
           "rssDate": "Sat, 14 Nov 2026 05:32:21 +0000",
           "author": "Tigercubrider",
-          "metricsObservedAt": "2026-11-16T03:51:16.933Z",
+          "metricsObservedAt": "2026-11-16T03:55:42.263Z",
           "detail": {
             "status": "首帖作者与时间已提取",
-            "observedAt": "2026-11-16T03:51:16.933Z",
+            "observedAt": "2026-11-16T03:55:42.263Z",
             "metadataSource": "首帖 article data-author/time"
           },
           "verification": {
@@ -326,10 +326,10 @@
           "metricsSource": "Building论坛主题列表",
           "rssDate": "Thu, 12 Nov 2026 08:41:17 +0000",
           "author": "Hoponline",
-          "metricsObservedAt": "2026-11-16T03:51:17.115Z",
+          "metricsObservedAt": "2026-11-16T03:55:42.485Z",
           "detail": {
             "status": "首帖作者与时间已提取",
-            "observedAt": "2026-11-16T03:51:17.115Z",
+            "observedAt": "2026-11-16T03:55:42.485Z",
             "metadataSource": "首帖 article data-author/time"
           },
           "verification": {
@@ -358,10 +358,10 @@
           "metricsSource": "Building论坛主题列表",
           "rssDate": "Thu, 12 Nov 2026 08:13:50 +0000",
           "author": "borderfox",
-          "metricsObservedAt": "2026-11-16T03:51:17.286Z",
+          "metricsObservedAt": "2026-11-16T03:55:42.720Z",
           "detail": {
             "status": "首帖作者与时间已提取",
-            "observedAt": "2026-11-16T03:51:17.286Z",
+            "observedAt": "2026-11-16T03:55:42.720Z",
             "metadataSource": "首帖 article data-author/time"
           },
           "verification": {
@@ -390,10 +390,10 @@
           "metricsSource": "Building论坛主题列表",
           "rssDate": "Wed, 11 Nov 2026 08:41:27 +0000",
           "author": "SouthDrive",
-          "metricsObservedAt": "2026-11-16T03:51:17.439Z",
+          "metricsObservedAt": "2026-11-16T03:55:43.221Z",
           "detail": {
             "status": "首帖作者与时间已提取",
-            "observedAt": "2026-11-16T03:51:17.439Z",
+            "observedAt": "2026-11-16T03:55:43.221Z",
             "metadataSource": "首帖 article data-author/time"
           },
           "verification": {
@@ -422,10 +422,10 @@
           "metricsSource": "Building论坛主题列表",
           "rssDate": "Wed, 11 Nov 2026 08:34:52 +0000",
           "author": "Skavenger",
-          "metricsObservedAt": "2026-11-16T03:51:17.604Z",
+          "metricsObservedAt": "2026-11-16T03:55:43.400Z",
           "detail": {
             "status": "首帖作者与时间已提取",
-            "observedAt": "2026-11-16T03:51:17.604Z",
+            "observedAt": "2026-11-16T03:55:43.400Z",
             "metadataSource": "首帖 article data-author/time"
           },
           "verification": {
@@ -446,7 +446,7 @@
       "finalUrl": "https://www.diynot.com/diy/forums/building/index.rss"
     },
     {
-      "observedAt": "2026-11-16T03:51:14.042Z",
+      "observedAt": "2026-11-16T03:55:39.751Z",
       "name": "ContractorTalk",
       "url": "https://www.contractortalk.com/forums/",
       "fields": "承包商论坛：讨论、回复及浏览量需页面核验",
@@ -456,8 +456,8 @@
         {
           "title": "How are you covering after-hours no-heat calls this winter?",
           "url": "https://www.contractortalk.com/threads/how-are-you-covering-after-hours-no-heat-calls-this-winter.465631/",
-          "author": "GeorgeG123",
-          "publishedAt": "2026-11-15T21:08:08.000Z",
+          "author": "BarryHolt",
+          "publishedAt": "2026-11-15T18:47:19.000Z",
           "metrics": {
             "replies": 3,
             "views": 30
@@ -470,16 +470,22 @@
             {
               "url": "https://www.contractortalk.com/threads/how-are-you-covering-after-hours-no-heat-calls-this-winter.465631/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.373Z",
-              "durationMs": 26,
+              "observedAt": "2026-11-16T03:55:40.023Z",
+              "durationMs": 11,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
-          "metadataSource": "首帖 article data-author/time",
-          "metricsObservedAt": "2026-11-16T03:51:14.401Z",
+          "visiblePostMetadata": {
+            "author": "GeorgeG123",
+            "publishedAt": "2026-11-15T21:08:08.000Z",
+            "note": "页面可读article元数据，不默认视为首帖"
+          },
+          "metadataSource": "论坛列表明确标注的起始作者与时间",
+          "firstPostConfirmed": false,
+          "metricsObservedAt": "2026-11-16T03:55:40.037Z",
           "detail": {
-            "status": "首帖元数据已提取",
+            "status": "候选原帖，元数据仍有缺口",
             "metricsStatus": "帖子级指标已提取"
           },
           "projectLocation": {
@@ -490,15 +496,15 @@
             {
               "url": "https://www.contractortalk.com/forums/contracting-business-forum.16/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.401Z",
-              "durationMs": 45,
+              "observedAt": "2026-11-16T03:55:40.037Z",
+              "durationMs": 10,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
           "metricEvidence": {
             "url": "https://www.contractortalk.com/forums/contracting-business-forum.16/",
-            "observedAt": "2026-11-16T03:51:14.401Z",
+            "observedAt": "2026-11-16T03:55:40.037Z",
             "structure": {
               "threadId": "465631",
               "targetMatched": true,
@@ -513,20 +519,23 @@
             "publishedAt": "2026-11-15T18:47:19.000Z",
             "source": "https://www.contractortalk.com/forums/contracting-business-forum.16/"
           },
-          "metadataConflict": true,
+          "originResolution": {
+            "detailFirstPostConfirmed": false,
+            "detailSource": "未找到明确首帖证据",
+            "listingSource": "https://www.contractortalk.com/forums/contracting-business-forum.16/",
+            "status": "使用列表明确起始字段，详情未定位到首帖"
+          },
           "quality": {
-            "status": "待核验线索",
-            "gaps": [
-              "单帖与列表首帖字段冲突"
-            ],
+            "status": "基础字段齐备",
+            "gaps": [],
             "note": "字段完整度不等于地区或热度已核验"
           }
         },
         {
           "title": "AI homemade estimating tools and process",
           "url": "https://www.contractortalk.com/threads/ai-homemade-estimating-tools-and-process.465615/",
-          "author": "KAP",
-          "publishedAt": "2026-11-14T16:40:25.000Z",
+          "author": "hinejs",
+          "publishedAt": "2026-11-13T21:22:16.000Z",
           "metrics": {
             "replies": 3,
             "views": 51
@@ -539,16 +548,22 @@
             {
               "url": "https://www.contractortalk.com/threads/ai-homemade-estimating-tools-and-process.465615/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.450Z",
-              "durationMs": 44,
+              "observedAt": "2026-11-16T03:55:40.050Z",
+              "durationMs": 10,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
-          "metadataSource": "首帖 article data-author/time",
-          "metricsObservedAt": "2026-11-16T03:51:14.401Z",
+          "visiblePostMetadata": {
+            "author": "KAP",
+            "publishedAt": "2026-11-14T16:40:25.000Z",
+            "note": "页面可读article元数据，不默认视为首帖"
+          },
+          "metadataSource": "论坛列表明确标注的起始作者与时间",
+          "firstPostConfirmed": false,
+          "metricsObservedAt": "2026-11-16T03:55:40.037Z",
           "detail": {
-            "status": "首帖元数据已提取",
+            "status": "候选原帖，元数据仍有缺口",
             "metricsStatus": "帖子级指标已提取"
           },
           "projectLocation": {
@@ -559,15 +574,15 @@
             {
               "url": "https://www.contractortalk.com/forums/contracting-business-forum.16/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.401Z",
-              "durationMs": 45,
+              "observedAt": "2026-11-16T03:55:40.037Z",
+              "durationMs": 10,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
           "metricEvidence": {
             "url": "https://www.contractortalk.com/forums/contracting-business-forum.16/",
-            "observedAt": "2026-11-16T03:51:14.401Z",
+            "observedAt": "2026-11-16T03:55:40.037Z",
             "structure": {
               "threadId": "465615",
               "targetMatched": true,
@@ -582,20 +597,23 @@
             "publishedAt": "2026-11-13T21:22:16.000Z",
             "source": "https://www.contractortalk.com/forums/contracting-business-forum.16/"
           },
-          "metadataConflict": true,
+          "originResolution": {
+            "detailFirstPostConfirmed": false,
+            "detailSource": "未找到明确首帖证据",
+            "listingSource": "https://www.contractortalk.com/forums/contracting-business-forum.16/",
+            "status": "使用列表明确起始字段，详情未定位到首帖"
+          },
           "quality": {
-            "status": "待核验线索",
-            "gaps": [
-              "单帖与列表首帖字段冲突"
-            ],
+            "status": "基础字段齐备",
+            "gaps": [],
             "note": "字段完整度不等于地区或热度已核验"
           }
         },
         {
           "title": "How I keep T&amp;M change orders from turning into argument invoices",
           "url": "https://www.contractortalk.com/threads/how-i-keep-t-m-change-orders-from-turning-into-argument-invoices.465557/",
-          "author": "GeorgeG123",
-          "publishedAt": "2026-11-09T22:13:45.000Z",
+          "author": "cmgnspire",
+          "publishedAt": "2026-11-09T20:10:26.000Z",
           "metrics": {
             "replies": 7,
             "views": 232
@@ -608,16 +626,22 @@
             {
               "url": "https://www.contractortalk.com/threads/how-i-keep-t-m-change-orders-from-turning-into-argument-invoices.465557/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.497Z",
-              "durationMs": 64,
+              "observedAt": "2026-11-16T03:55:40.064Z",
+              "durationMs": 11,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
-          "metadataSource": "首帖 article data-author/time",
-          "metricsObservedAt": "2026-11-16T03:51:14.401Z",
+          "visiblePostMetadata": {
+            "author": "GeorgeG123",
+            "publishedAt": "2026-11-09T22:13:45.000Z",
+            "note": "页面可读article元数据，不默认视为首帖"
+          },
+          "metadataSource": "论坛列表明确标注的起始作者与时间",
+          "firstPostConfirmed": false,
+          "metricsObservedAt": "2026-11-16T03:55:40.037Z",
           "detail": {
-            "status": "首帖元数据已提取",
+            "status": "候选原帖，元数据仍有缺口",
             "metricsStatus": "帖子级指标已提取"
           },
           "projectLocation": {
@@ -628,15 +652,15 @@
             {
               "url": "https://www.contractortalk.com/forums/contracting-business-forum.16/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.401Z",
-              "durationMs": 45,
+              "observedAt": "2026-11-16T03:55:40.037Z",
+              "durationMs": 10,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
           "metricEvidence": {
             "url": "https://www.contractortalk.com/forums/contracting-business-forum.16/",
-            "observedAt": "2026-11-16T03:51:14.401Z",
+            "observedAt": "2026-11-16T03:55:40.037Z",
             "structure": {
               "threadId": "465557",
               "targetMatched": true,
@@ -651,20 +675,23 @@
             "publishedAt": "2026-11-09T20:10:26.000Z",
             "source": "https://www.contractortalk.com/forums/contracting-business-forum.16/"
           },
-          "metadataConflict": true,
+          "originResolution": {
+            "detailFirstPostConfirmed": false,
+            "detailSource": "未找到明确首帖证据",
+            "listingSource": "https://www.contractortalk.com/forums/contracting-business-forum.16/",
+            "status": "使用列表明确起始字段，详情未定位到首帖"
+          },
           "quality": {
-            "status": "待核验线索",
-            "gaps": [
-              "单帖与列表首帖字段冲突"
-            ],
+            "status": "基础字段齐备",
+            "gaps": [],
             "note": "字段完整度不等于地区或热度已核验"
           }
         },
         {
           "title": "Ivermectin",
           "url": "https://www.contractortalk.com/threads/ivermectin.465607/",
-          "author": "MarkJames",
-          "publishedAt": "2026-11-13T13:22:48.000Z",
+          "author": "Tom M",
+          "publishedAt": "2026-11-13T12:51:34.000Z",
           "metrics": {
             "replies": 16,
             "views": 192
@@ -677,16 +704,22 @@
             {
               "url": "https://www.contractortalk.com/threads/ivermectin.465607/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.564Z",
-              "durationMs": 49,
+              "observedAt": "2026-11-16T03:55:40.079Z",
+              "durationMs": 12,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
-          "metadataSource": "首帖 article data-author/time",
-          "metricsObservedAt": "2026-11-16T03:51:14.614Z",
+          "visiblePostMetadata": {
+            "author": "MarkJames",
+            "publishedAt": "2026-11-13T13:22:48.000Z",
+            "note": "页面可读article元数据，不默认视为首帖"
+          },
+          "metadataSource": "论坛列表明确标注的起始作者与时间",
+          "firstPostConfirmed": false,
+          "metricsObservedAt": "2026-11-16T03:55:40.093Z",
           "detail": {
-            "status": "首帖元数据已提取",
+            "status": "候选原帖，元数据仍有缺口",
             "metricsStatus": "帖子级指标已提取"
           },
           "projectLocation": {
@@ -697,15 +730,15 @@
             {
               "url": "https://www.contractortalk.com/forums/jobsite-health-safety-forum.59/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.614Z",
-              "durationMs": 67,
+              "observedAt": "2026-11-16T03:55:40.093Z",
+              "durationMs": 12,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
           "metricEvidence": {
             "url": "https://www.contractortalk.com/forums/jobsite-health-safety-forum.59/",
-            "observedAt": "2026-11-16T03:51:14.614Z",
+            "observedAt": "2026-11-16T03:55:40.093Z",
             "structure": {
               "threadId": "465607",
               "targetMatched": true,
@@ -720,12 +753,15 @@
             "publishedAt": "2026-11-13T12:51:34.000Z",
             "source": "https://www.contractortalk.com/forums/jobsite-health-safety-forum.59/"
           },
-          "metadataConflict": true,
+          "originResolution": {
+            "detailFirstPostConfirmed": false,
+            "detailSource": "未找到明确首帖证据",
+            "listingSource": "https://www.contractortalk.com/forums/jobsite-health-safety-forum.59/",
+            "status": "使用列表明确起始字段，详情未定位到首帖"
+          },
           "quality": {
-            "status": "待核验线索",
-            "gaps": [
-              "单帖与列表首帖字段冲突"
-            ],
+            "status": "基础字段齐备",
+            "gaps": [],
             "note": "字段完整度不等于地区或热度已核验"
           }
         }
@@ -734,8 +770,8 @@
         {
           "url": "https://www.contractortalk.com/forums/",
           "attempt": 1,
-          "observedAt": "2026-11-16T03:51:14.042Z",
-          "durationMs": 329,
+          "observedAt": "2026-11-16T03:55:39.751Z",
+          "durationMs": 270,
           "httpStatus": 200,
           "kind": "success"
         }
@@ -743,7 +779,7 @@
       "selectedSource": "https://www.contractortalk.com/forums/"
     },
     {
-      "observedAt": "2026-11-16T03:51:14.432Z",
+      "observedAt": "2026-11-16T03:55:40.125Z",
       "name": "SkyscraperCity",
       "url": "https://www.skyscrapercity.com/forums/",
       "fields": "项目、城市建设及中东工程讨论",
@@ -753,8 +789,8 @@
         {
           "title": "MANCHESTER | Aldridge | 166m | 545ft | 54 fl | Pro",
           "url": "https://www.skyscrapercity.com/threads/manchester-aldridge-166m-545ft-54-fl-pro.2470683/",
-          "author": "EverythingButABeach",
-          "publishedAt": "2026-11-11T10:14:27.000Z",
+          "author": "mileymc1",
+          "publishedAt": "2026-11-10T22:17:51.000Z",
           "metrics": {
             "replies": 5,
             "views": 387
@@ -767,16 +803,22 @@
             {
               "url": "https://www.skyscrapercity.com/threads/manchester-aldridge-166m-545ft-54-fl-pro.2470683/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.457Z",
-              "durationMs": 23,
+              "observedAt": "2026-11-16T03:55:40.136Z",
+              "durationMs": 9,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
-          "metadataSource": "首帖 article data-author/time",
-          "metricsObservedAt": "2026-11-16T03:51:14.482Z",
+          "visiblePostMetadata": {
+            "author": "EverythingButABeach",
+            "publishedAt": "2026-11-11T10:14:27.000Z",
+            "note": "页面可读article元数据，不默认视为首帖"
+          },
+          "metadataSource": "论坛列表明确标注的起始作者与时间",
+          "firstPostConfirmed": false,
+          "metricsObservedAt": "2026-11-16T03:55:40.147Z",
           "detail": {
-            "status": "首帖元数据已提取",
+            "status": "候选原帖，元数据仍有缺口",
             "metricsStatus": "帖子级指标已提取"
           },
           "projectLocation": {
@@ -805,15 +847,15 @@
             {
               "url": "https://www.skyscrapercity.com/forums/proposed-highrises.1724/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.482Z",
-              "durationMs": 22,
+              "observedAt": "2026-11-16T03:55:40.147Z",
+              "durationMs": 8,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
           "metricEvidence": {
             "url": "https://www.skyscrapercity.com/forums/proposed-highrises.1724/",
-            "observedAt": "2026-11-16T03:51:14.482Z",
+            "observedAt": "2026-11-16T03:55:40.147Z",
             "structure": {
               "threadId": "2470683",
               "targetMatched": true,
@@ -828,12 +870,15 @@
             "publishedAt": "2026-11-10T22:17:51.000Z",
             "source": "https://www.skyscrapercity.com/forums/proposed-highrises.1724/"
           },
-          "metadataConflict": true,
+          "originResolution": {
+            "detailFirstPostConfirmed": false,
+            "detailSource": "未找到明确首帖证据",
+            "listingSource": "https://www.skyscrapercity.com/forums/proposed-highrises.1724/",
+            "status": "使用列表明确起始字段，详情未定位到首帖"
+          },
           "quality": {
-            "status": "待核验线索",
-            "gaps": [
-              "单帖与列表首帖字段冲突"
-            ],
+            "status": "基础字段齐备",
+            "gaps": [],
             "note": "字段完整度不等于地区或热度已核验"
           }
         },
@@ -854,14 +899,20 @@
             {
               "url": "https://www.skyscrapercity.com/threads/approved-palm-springs-dubai-waterfront.2470685/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.506Z",
-              "durationMs": 23,
+              "observedAt": "2026-11-16T03:55:40.157Z",
+              "durationMs": 8,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
-          "metadataSource": "未找到首帖元数据",
-          "metricsObservedAt": "2026-11-16T03:51:14.530Z",
+          "visiblePostMetadata": {
+            "author": null,
+            "publishedAt": null,
+            "note": "页面可读article元数据，不默认视为首帖"
+          },
+          "metadataSource": "论坛列表明确标注的起始作者与时间",
+          "firstPostConfirmed": false,
+          "metricsObservedAt": "2026-11-16T03:55:40.166Z",
           "detail": {
             "status": "候选原帖，元数据仍有缺口",
             "metricsStatus": "帖子级指标已提取"
@@ -896,15 +947,15 @@
             {
               "url": "https://www.skyscrapercity.com/forums/dubai-waterfront-and-palm-jebel-ali.1210/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.530Z",
-              "durationMs": 24,
+              "observedAt": "2026-11-16T03:55:40.166Z",
+              "durationMs": 10,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
           "metricEvidence": {
             "url": "https://www.skyscrapercity.com/forums/dubai-waterfront-and-palm-jebel-ali.1210/",
-            "observedAt": "2026-11-16T03:51:14.530Z",
+            "observedAt": "2026-11-16T03:55:40.166Z",
             "structure": {
               "threadId": "2470685",
               "targetMatched": true,
@@ -919,6 +970,12 @@
             "publishedAt": "2026-11-11T01:49:38.000Z",
             "source": "https://www.skyscrapercity.com/forums/dubai-waterfront-and-palm-jebel-ali.1210/"
           },
+          "originResolution": {
+            "detailFirstPostConfirmed": false,
+            "detailSource": "未找到明确首帖证据",
+            "listingSource": "https://www.skyscrapercity.com/forums/dubai-waterfront-and-palm-jebel-ali.1210/",
+            "status": "使用列表明确起始字段，详情未定位到首帖"
+          },
           "quality": {
             "status": "基础字段齐备",
             "gaps": [],
@@ -928,8 +985,8 @@
         {
           "title": "Torino Residence | ? m | 26 fl/kate | Approved",
           "url": "https://www.skyscrapercity.com/threads/torino-residence-m-26-fl-kate-approved.2471071/",
-          "author": "+×÷=/_€£¥₩",
-          "publishedAt": "2026-11-11T09:39:30.000Z",
+          "author": "Edi_H",
+          "publishedAt": "2026-11-11T08:13:28.000Z",
           "metrics": {
             "replies": 4,
             "views": 331
@@ -942,16 +999,22 @@
             {
               "url": "https://www.skyscrapercity.com/threads/torino-residence-m-26-fl-kate-approved.2471071/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.556Z",
-              "durationMs": 24,
+              "observedAt": "2026-11-16T03:55:40.180Z",
+              "durationMs": 9,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
-          "metadataSource": "首帖 article data-author/time",
-          "metricsObservedAt": "2026-11-16T03:51:14.581Z",
+          "visiblePostMetadata": {
+            "author": "+×÷=/_€£¥₩",
+            "publishedAt": "2026-11-11T09:39:30.000Z",
+            "note": "页面可读article元数据，不默认视为首帖"
+          },
+          "metadataSource": "论坛列表明确标注的起始作者与时间",
+          "firstPostConfirmed": false,
+          "metricsObservedAt": "2026-11-16T03:55:40.192Z",
           "detail": {
-            "status": "首帖元数据已提取",
+            "status": "候选原帖，元数据仍有缺口",
             "metricsStatus": "帖子级指标已提取"
           },
           "projectLocation": {
@@ -962,15 +1025,15 @@
             {
               "url": "https://www.skyscrapercity.com/forums/tirana.3195/",
               "attempt": 1,
-              "observedAt": "2026-11-16T03:51:14.581Z",
-              "durationMs": 25,
+              "observedAt": "2026-11-16T03:55:40.192Z",
+              "durationMs": 10,
               "httpStatus": 200,
               "kind": "success"
             }
           ],
           "metricEvidence": {
             "url": "https://www.skyscrapercity.com/forums/tirana.3195/",
-            "observedAt": "2026-11-16T03:51:14.581Z",
+            "observedAt": "2026-11-16T03:55:40.192Z",
             "structure": {
               "threadId": "2471071",
               "targetMatched": true,
@@ -985,12 +1048,15 @@
             "publishedAt": "2026-11-11T08:13:28.000Z",
             "source": "https://www.skyscrapercity.com/forums/tirana.3195/"
           },
-          "metadataConflict": true,
+          "originResolution": {
+            "detailFirstPostConfirmed": false,
+            "detailSource": "未找到明确首帖证据",
+            "listingSource": "https://www.skyscrapercity.com/forums/tirana.3195/",
+            "status": "使用列表明确起始字段，详情未定位到首帖"
+          },
           "quality": {
-            "status": "待核验线索",
-            "gaps": [
-              "单帖与列表首帖字段冲突"
-            ],
+            "status": "基础字段齐备",
+            "gaps": [],
             "note": "字段完整度不等于地区或热度已核验"
           }
         }
@@ -999,16 +1065,16 @@
         {
           "url": "https://www.skyscrapercity.com/forums/",
           "attempt": 1,
-          "observedAt": "2026-11-16T03:51:14.043Z",
-          "durationMs": 385,
+          "observedAt": "2026-11-16T03:55:39.752Z",
+          "durationMs": 370,
           "httpStatus": 200,
           "kind": "success"
         },
         {
           "url": "https://www.skyscrapercity.com/",
           "attempt": 1,
-          "observedAt": "2026-11-16T03:51:14.432Z",
-          "durationMs": 24,
+          "observedAt": "2026-11-16T03:55:40.125Z",
+          "durationMs": 11,
           "httpStatus": 200,
           "kind": "success"
         }
