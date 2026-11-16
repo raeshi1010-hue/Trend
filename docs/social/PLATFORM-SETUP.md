@@ -4,7 +4,7 @@
 
 ## 现在可以配置
 
-YouTube与Reddit适配器已实现，完整步骤见[AUTHORIZATION.md](AUTHORIZATION.md)。在GitHub仓库Settings → Secrets and variables → Actions中配置：
+YouTube、Reddit和X适配器已实现，完整步骤见[AUTHORIZATION.md](AUTHORIZATION.md)。在GitHub仓库Settings → Secrets and variables → Actions中配置：
 
 | 平台 | Actions Secrets | Actions Variables | 前提 |
 |---|---|---|---|
@@ -19,7 +19,7 @@ YouTube与Reddit适配器已实现，完整步骤见[AUTHORIZATION.md](AUTHORIZA
 |---|---|---|
 | Instagram | 监测的专业账号/话题清单、Meta开发者应用和适合的Instagram产品 | 不同登录产品权限不同，个人账号/任意全网内容不可默认读取；适配器未实现 |
 | Facebook | 公共主页清单、对应管理员及Meta应用审核范围 | 公共主页读取不等于全站帖子搜索，也不包括私密群组；适配器未实现 |
-| X | 开发者项目、Recent Search访问资格与额度/费用确认 | 尚未实现适配器，不自动购买或要求先交Bearer token |
+| X | 开发者项目、Recent Search访问资格与额度/费用确认 | 现已实现适配器；Secret X_BEARER_TOKEN与Variable X_API_ENABLED=true均齐备才调用，见X-FORUM-UPDATE.md |
 | TikTok | 先区分指定授权账号与地区趋势监测 | Display API为授权用户视频，不是全网搜索；Research需另核资格。适配器未实现 |
 | LinkedIn | 目标公司主页、管理员、Community Management产品申请 | 组织/主页分析不等于全站关键词监听；适配器未实现 |
 

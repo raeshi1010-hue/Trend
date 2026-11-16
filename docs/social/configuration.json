@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-16T02:52:45.694Z",
+  "checkedAt": "2026-11-16T03:02:35.293Z",
   "note": "本次进程可见配置；PR不注入Secrets，不代表仓库未保存Secrets。配置项存在不代表有效授权。",
   "platforms": [
     {
@@ -28,15 +28,34 @@
     },
     {
       "name": "X",
-      "implementation": "planned",
-      "route": "官方Recent Search，需确认开发者访问及实际费用；未实现适配器",
-      "requirements": [],
-      "action": "先确认搜索权限、额度及费用，再实现Bearer接入；不自动付费",
+      "implementation": "adapter",
+      "route": "官方Recent Search关键词样本，最多10条，不自动翻页",
+      "requirements": [
+        {
+          "name": "X_BEARER_TOKEN",
+          "kind": "secret"
+        },
+        {
+          "name": "X_API_ENABLED",
+          "kind": "variable",
+          "equals": "true"
+        }
+      ],
+      "action": "确认开发者搜索权限与额度/费用后配置Bearer令牌，并显式设置X_API_ENABLED=true",
       "fields": "原帖、作者、created_at及public_metrics，按获批范围",
       "bgm": "未验证通用音频榜",
       "documentation": "https://docs.x.com/x-api/posts/search-recent-posts",
-      "status": "采集方式待定／适配器未实现",
-      "missing": []
+      "status": "适配器已实现，待授权配置",
+      "missing": [
+        {
+          "name": "X_BEARER_TOKEN",
+          "kind": "secret"
+        },
+        {
+          "name": "X_API_ENABLED",
+          "kind": "variable"
+        }
+      ]
     },
     {
       "name": "YouTube",
@@ -162,9 +181,9 @@
     {
       "name": "ContractorTalk",
       "implementation": "discovery",
-      "route": "公共论坛主页可达；未实现帖子解析",
+      "route": "公开主页发现最多4条同站主题直链并尝试单帖元数据",
       "requirements": [],
-      "action": "选定施工工种分区并验证原帖结构",
+      "action": "试采后核对候选时效、市场和元数据缺口，不作为全站热榜",
       "fields": "回复/浏览、作者、首发待验证",
       "bgm": "通常不适用",
       "documentation": "https://www.contractortalk.com/forums/",
@@ -174,9 +193,9 @@
     {
       "name": "SkyscraperCity",
       "implementation": "discovery",
-      "route": "公共论坛主页可达；未实现帖子解析",
+      "route": "公开主页发现最多4条同站主题直链并尝试单帖元数据",
       "requirements": [],
-      "action": "选定中东/欧美国家项目分区，验证原帖与指标",
+      "action": "试采后核对候选时效、市场和元数据缺口，不作为全站热榜",
       "fields": "项目讨论、作者、首发和互动待验证",
       "bgm": "通常不适用",
       "documentation": "https://www.skyscrapercity.com/forums/",

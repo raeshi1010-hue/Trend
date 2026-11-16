@@ -19,7 +19,7 @@ concurrency:
 jobs:
   public-source-pilot:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,7 +30,7 @@ jobs:
       - name: Check collector syntax
         run: node --check scripts/social-pilot.mjs
       - name: Test metadata parsing and API contracts
-        run: node --test scripts/social-adapters.test.mjs scripts/social-config.test.mjs
+        run: node --test scripts/social-adapters.test.mjs scripts/social-config.test.mjs scripts/social-expansion.test.mjs
       - name: Probe public sources without credentials
         run: |
           node scripts/social-pilot.mjs
@@ -40,6 +40,8 @@ jobs:
           REDDIT_ACCESS_TOKEN: ${{ github.event_name == 'workflow_dispatch' && secrets.REDDIT_ACCESS_TOKEN || '' }}
           REDDIT_USER_AGENT: ${{ github.event_name == 'workflow_dispatch' && secrets.REDDIT_USER_AGENT || '' }}
           REDDIT_API_APPROVED: ${{ github.event_name == 'workflow_dispatch' && vars.REDDIT_API_APPROVED || '' }}
+          X_BEARER_TOKEN: ${{ github.event_name == 'workflow_dispatch' && secrets.X_BEARER_TOKEN || '' }}
+          X_API_ENABLED: ${{ github.event_name == 'workflow_dispatch' && vars.X_API_ENABLED || '' }}
       - name: Validate output and publish run summary
         run: node scripts/social-validate.mjs
       - name: Upload dashboard and evidence records
@@ -53,6 +55,7 @@ jobs:
             docs/social/SOURCES.md
             docs/social/AUTHORIZATION.md
             docs/social/PLATFORM-SETUP.md
+            docs/social/X-FORUM-UPDATE.md
             docs/social/configuration.html
             docs/social/configuration.json
             config/social-platforms.json
