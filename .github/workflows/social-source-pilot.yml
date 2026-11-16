@@ -58,6 +58,12 @@ jobs:
           LINKEDIN_API_VERSION: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && vars.LINKEDIN_API_VERSION || '' }}
       - name: Validate output and publish run summary
         run: node scripts/social-validate.mjs
+      - name: Generate dated daily and weekly deliveries
+        run: |
+          node scripts/social-delivery.mjs
+          cd docs/social
+          zip -q -r "delivery-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.zip" delivery
+          cp "delivery-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.zip" delivery/current-delivery.zip
       - name: Upload dashboard and evidence records
         if: always()
         uses: actions/upload-artifact@v4
@@ -76,8 +82,32 @@ jobs:
             docs/social/FORUM-EVIDENCE.md
             docs/social/configuration.html
             docs/social/configuration.json
+            docs/social/delivery/
+            docs/social/delivery-*.zip
             config/social-platforms.json
             config/social-monitoring-requirements.md
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 90
+      - name: Configure report hosting
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+      - name: Upload report website
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/social/delivery
 
+  deploy-reports:
+    if: github.event_name != 'pull_request'
+    needs: public-source-pilot
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish daily and weekly report website
+        id: deployment
+        uses: actions/deploy-pages@v4
