@@ -1,5 +1,6 @@
 import {jsonRequest,parseForum} from './social-adapters.mjs';
 import {publicText} from './social-public-http.mjs';
+import {threadStatistics,forumCategory,locationEvidence} from './social-forum-evidence.mjs';
 export async function xSearch(env=process.env,request=fetch){
  if(env.X_API_ENABLED!=='true')return {status:'X接口已实现，待确认访问资格与调用费用',items:[]};
  if(!env.X_BEARER_TOKEN)return {status:'未配置 X_BEARER_TOKEN',items:[]};
@@ -23,6 +24,7 @@ export function discoverThreads(html,base){
 }
 export async function forumSample(source,html,request=fetch){
  const items=discoverThreads(html,source.url);
+ const categoryCache=new Map();
  for(const item of items){
   try{const read=await publicText(item.url,{request,timeoutMs:12000});
    item.accessAttempts=read.attempts;
@@ -30,6 +32,16 @@ export async function forumSample(source,html,request=fetch){
    const body=read.body,parsed=parseForum(body);
    const heading=body.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]?.replace(/<[^>]*>/g,'').trim();
    Object.assign(item,parsed,{...(heading?{title:heading}:{}),metricsObservedAt:new Date().toISOString(),detail:{status:parsed.author&&parsed.publishedAt?'首帖元数据已提取':'候选原帖，元数据仍有缺口'}});
+   item.projectLocation=locationEvidence(item.title,body,item.url);
+   // Only retain statistics explicitly associated with this thread.
+   item.metrics=threadStatistics(body,item.url);
+   const category=forumCategory(body,item.url);
+   if(category&&!Object.keys(item.metrics).length){
+    if(!categoryCache.has(category))categoryCache.set(category,await publicText(category,{request,timeoutMs:12000}));
+    const listing=categoryCache.get(category);item.metricAttempts=listing.attempts;
+    if(listing.ok){const found=threadStatistics(listing.body,item.url);if(Object.keys(found).length){item.metrics=found;item.metricsSource=category;}}
+   }
+   item.detail.metricsStatus=Object.keys(item.metrics).length?'帖子级指标已提取':'来源未提供可核验的帖子级指标';
   }catch{item.detail={status:'发现原帖链接，单帖访问失败'};}
  }
  return items.filter(i=>!/community rules|pros.only|terms|privacy|welcome/i.test(i.title)&&(!i.publishedAt||Date.parse(i.publishedAt)>=Date.now()-7*86400000));
@@ -58,7 +70,7 @@ export function enhanceDashboard(html,attempts){
   html=html.replace('<h2>'+esc(source.name)+'</h2>','<h2>'+esc(source.name)+'</h2>'+trace);
  }
  const items=attempts.flatMap(s=>s.items);let n=0;
- html=html.replaceAll('<section lang="und" dir="auto">',()=>{const i=items[n++];const market=['欧洲','北美','中东'].includes(i?.market)?i.market:'市场未确认';return '<section lang="und" dir="auto" data-market="'+market+'" data-industry="'+classify(i?.title)+'">'});
+ html=html.replaceAll('<section lang="und" dir="auto">',()=>{const i=items[n++];const market=['欧洲','北美','中东'].includes(i?.market)?i.market:'市场未确认';const place=i?.projectLocation;const info=place?.place?'<p>项目所在地线索：'+esc(place.place)+' · '+esc(place.status)+'。买家／受众市场仍未确认。</p>':'';return '<section lang="und" dir="auto" data-market="'+market+'" data-industry="'+classify(i?.title)+'">'+info;});
  const options=['全部行业','工程与使用端','上游资源端','流通渠道端','技术检测服务端','监管行业配套','终端散户','待分类'].map(v=>'<option>'+v+'</option>').join('');
  const controls='<div style="margin-bottom:16px"><label>市场 <select id="market-filter"><option>全部市场</option><option>市场未确认</option><option>欧洲</option><option>北美</option><option>中东</option></select></label> <label>行业关键词初筛 <select id="industry-filter">'+options+'</select></label><p>行业按标题关键词初筛，不代表已确认客户角色；当前市场均待核验。</p><p id="filter-count" aria-live="polite"></p></div>';
  html=html.replace('<div id="sources"',controls+'<div id="sources"');
