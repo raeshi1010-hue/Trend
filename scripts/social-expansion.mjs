@@ -2,6 +2,7 @@ import {jsonRequest,parseForum} from './social-adapters.mjs';
 import {publicText} from './social-public-http.mjs';
 import {threadStatistics,forumCategory,locationEvidence,forumRow} from './social-forum-evidence.mjs';
 import {assessItem,metricStructure} from './social-quality.mjs';
+import {originalPost} from './social-original-post.mjs';
 export async function xSearch(env=process.env,request=fetch){
  if(env.X_API_ENABLED!=='true')return {status:'X接口已实现，待确认访问资格与调用费用',items:[]};
  if(!env.X_BEARER_TOKEN)return {status:'未配置 X_BEARER_TOKEN',items:[]};
@@ -30,7 +31,8 @@ export async function forumSample(source,html,request=fetch){
   try{const read=await publicText(item.url,{request,timeoutMs:12000});
    item.accessAttempts=read.attempts;
    if(!read.ok){item.detail={status:'发现原帖链接，单帖访问失败',failureKind:read.kind};continue;}
-   const body=read.body,parsed=parseForum(body);
+   const body=read.body,visiblePost=parseForum(body),parsed=originalPost(body);
+   item.visiblePostMetadata={author:visiblePost.author,publishedAt:visiblePost.publishedAt,note:'页面可读article元数据，不默认视为首帖'};
    const heading=body.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]?.replace(/<[^>]*>/g,'').trim();
    Object.assign(item,parsed,{...(heading?{title:heading}:{}),metricsObservedAt:new Date().toISOString(),detail:{status:parsed.author&&parsed.publishedAt?'首帖元数据已提取':'候选原帖，元数据仍有缺口'}});
    item.projectLocation=locationEvidence(item.title,body,item.url);
@@ -44,6 +46,8 @@ export async function forumSample(source,html,request=fetch){
      const row=forumRow(listing.body,item.url);item.listingMetadata={author:row.author,publishedAt:row.publishedAt,source:category};
      if((item.author&&row.author&&item.author!==row.author)||(item.publishedAt&&row.publishedAt&&item.publishedAt!==row.publishedAt))item.metadataConflict=true;
      if(!item.author)item.author=row.author;if(!item.publishedAt)item.publishedAt=row.publishedAt;
+     if(!parsed.firstPostConfirmed&&row.author&&row.publishedAt)item.metadataSource='论坛列表明确标注的起始作者与时间';
+     item.originResolution={detailFirstPostConfirmed:parsed.firstPostConfirmed,detailSource:parsed.metadataSource,listingSource:category,status:item.metadataConflict?'明确首帖与列表冲突，待核验':parsed.firstPostConfirmed?'明确首帖已识别':'使用列表明确起始字段，详情未定位到首帖'};
     }
    }
    item.detail.metricsStatus=Object.keys(item.metrics).length?'帖子级指标已提取':'来源未提供可核验的帖子级指标';
