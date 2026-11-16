@@ -1,6 +1,10 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {parseForum,enrichForum,youtube,reddit} from './social-adapters.mjs';
+import {parseForum,enrichForum,youtube,reddit,parseForumListing} from './social-adapters.mjs';
+test('listing keeps rounded view counts distinct from exact counts',()=>{
+ const m=parseForumListing('<div class="structItem structItem--thread"><a href="/diy/threads/test.123/">T</a><dt>Replies</dt><dd>12</dd><dt>Views</dt><dd>1K</dd>');
+ assert.deepEqual(m.get('123'),{replies:12,viewsDisplay:'1K'});
+});
 test('forum metadata uses thread interactions, never member reaction totals',()=>{
  const h='<div>Messages 10,000 Reaction score 300</div><script type="application/ld+json">'+JSON.stringify({'@type':'DiscussionForumPosting',author:{name:'builder'},datePublished:'2026-11-15T10:00:00Z',interactionStatistic:{interactionType:'https://schema.org/CommentAction',userInteractionCount:3}})+'</script>';
  assert.deepEqual(parseForum(h),{author:'builder',publishedAt:'2026-11-15T10:00:00.000Z',metrics:{comments:3},metadataSource:'DiscussionForumPosting JSON-LD'});

@@ -5,6 +5,21 @@ export async function jsonRequest(url, options={}, request=fetch) {
 }
 const text=s=>String(s??'').replace(/<[^>]*>/g,'').trim();
 const iso=s=>s&&Number.isFinite(Date.parse(s))?new Date(s).toISOString():null;
+export function parseForumListing(html){
+ const rows=new Map();
+ for(const block of html.split(/<div\b[^>]*class=["'][^"']*structItem--thread[^"']*["'][^>]*>/i).slice(1)){
+  const id=block.match(/href=["'][^"']*\/threads\/[^"']*\.(\d+)\/?["']/i)?.[1];if(!id)continue;
+  const metrics={};
+  for(const [label,key] of [['Replies','replies'],['Views','views']]){
+   const raw=text(block.match(new RegExp('<dt[^>]*>\\s*'+label+'\\s*</dt>\\s*<dd[^>]*>([\\s\\S]*?)</dd>','i'))?.[1]);
+   // K/M abbreviations are rounded, so preserve text rather than invent an exact count.
+   if(/^\d[\d,]*$/.test(raw))metrics[key]=Number(raw.replaceAll(',',''));
+   else if(raw)metrics[key+'Display']=raw;
+  }
+  rows.set(id,metrics);
+ }
+ return rows;
+}
 export function parseForum(html) {
  const nodes=[];
  function walk(x){if(Array.isArray(x))x.forEach(walk);else if(x&&typeof x==='object'){nodes.push(x);if(x['@graph'])walk(x['@graph']);}}
@@ -32,7 +47,8 @@ export async function enrichForum(item,request=fetch){
   const r=await request(u,{signal:AbortSignal.timeout(15000),redirect:'error'});
   if(!r.ok)throw new Error('HTTP_'+r.status);
   const parsed=parseForum(await r.text());
-  return {...item,rssDate:item.publishedAt,publishedAt:parsed.publishedAt,author:parsed.author,metrics:parsed.metrics,metricsObservedAt:observedAt,detail:{status:parsed.author&&parsed.publishedAt?'首帖作者与时间已提取':'首帖字段不完整',observedAt,metadataSource:parsed.metadataSource},verification:{author:!!parsed.author,publishedAt:!!parsed.publishedAt,metrics:Object.keys(parsed.metrics).length>0,market:false}};
+  const metrics={...item.metrics,...parsed.metrics};
+  return {...item,rssDate:item.publishedAt,publishedAt:parsed.publishedAt,author:parsed.author,metrics,metricsObservedAt:observedAt,detail:{status:parsed.author&&parsed.publishedAt?'首帖作者与时间已提取':'首帖字段不完整',observedAt,metadataSource:parsed.metadataSource},verification:{author:!!parsed.author,publishedAt:!!parsed.publishedAt,metrics:Object.keys(metrics).length>0,market:false}};
  }catch(e){return {...item,rssDate:item.publishedAt,publishedAt:null,author:null,detail:{status:'单帖读取失败',error:/^HTTP_\d+$/.test(e.message)?e.message:e.name,observedAt}};}
 }
 export async function youtube(env=process.env,request=fetch){
