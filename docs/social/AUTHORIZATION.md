@@ -1,3 +1,5 @@
+> 当前本地开发状态与新增平台配置见 [CURRENT-SETUP.md](CURRENT-SETUP.md)。下文保留原master阶段说明，其中“适配器未实现”等内容属于此前状态。
+
 # YouTube / Reddit 接口与授权
 
 本模块位于本仓库scripts/social-adapters.mjs，不依赖其他聊天。无配置时不调用官方接口，仍生成来源状态看板。PR工作流只跑无密钥试采；仅workflow_dispatch手动运行会注入Secrets，避免向PR代码提供令牌。

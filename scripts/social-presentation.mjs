@@ -7,7 +7,7 @@ export function displayTitle(value){
  });
 }
 export function displayMetrics(metrics={}){
- const labels={replies:'回复',comments:'评论',views:'浏览',likes:'点赞',viewsDisplay:'浏览（取整）',repliesDisplay:'回复（取整）',score:'帖子净分',upvoteRatio:'赞同比例',viewCount:'播放',likeCount:'点赞',commentCount:'评论',like_count:'点赞',reply_count:'回复',retweet_count:'转帖',repost_count:'转帖',quote_count:'引用',impression_count:'曝光',bookmark_count:'收藏'};
+ const labels={comments_count:'评论',comment_count:'评论',view_count:'播放',share_count:'分享',replies:'回复',comments:'评论',views:'浏览',likes:'点赞',viewsDisplay:'浏览（取整）',repliesDisplay:'回复（取整）',score:'帖子净分',upvoteRatio:'赞同比例',viewCount:'播放',likeCount:'点赞',commentCount:'评论',like_count:'点赞',reply_count:'回复',retweet_count:'转帖',repost_count:'转帖',quote_count:'引用',impression_count:'曝光',bookmark_count:'收藏'};
  const values=Object.entries(metrics||{}).filter(([,v])=>v!=null).map(([key,value])=>(labels[key]||key)+' '+value);
  return values.length?values.join(' · '):'互动指标未取得';
 }
