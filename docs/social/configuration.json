@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-16T03:14:56.652Z",
+  "checkedAt": "2026-11-16T03:31:34.229Z",
   "note": "本次进程可见配置；PR不注入Secrets，不代表仓库未保存Secrets。配置项存在不代表有效授权。",
   "platforms": [
     {
