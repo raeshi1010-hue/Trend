@@ -30,11 +30,12 @@ jobs:
       - name: Check collector syntax
         run: node --check scripts/social-pilot.mjs
       - name: Test metadata parsing and API contracts
-        run: node --test scripts/social-adapters.test.mjs scripts/social-config.test.mjs scripts/social-expansion.test.mjs scripts/social-public-http.test.mjs scripts/social-forum-evidence.test.mjs scripts/social-quality.test.mjs scripts/social-original-post.test.mjs scripts/social-presentation.test.mjs
+        run: node --test scripts/social-*.test.mjs
       - name: Probe public sources without credentials
         run: |
           node scripts/social-pilot.mjs
           node scripts/social-config.mjs
+          node scripts/social-public-acceptance.mjs
         env:
           YOUTUBE_API_KEY: ${{ github.event_name == 'workflow_dispatch' && secrets.YOUTUBE_API_KEY || '' }}
           REDDIT_ACCESS_TOKEN: ${{ github.event_name == 'workflow_dispatch' && secrets.REDDIT_ACCESS_TOKEN || '' }}
@@ -42,6 +43,15 @@ jobs:
           REDDIT_API_APPROVED: ${{ github.event_name == 'workflow_dispatch' && vars.REDDIT_API_APPROVED || '' }}
           X_BEARER_TOKEN: ${{ github.event_name == 'workflow_dispatch' && secrets.X_BEARER_TOKEN || '' }}
           X_API_ENABLED: ${{ github.event_name == 'workflow_dispatch' && vars.X_API_ENABLED || '' }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ github.event_name == 'workflow_dispatch' && secrets.INSTAGRAM_ACCESS_TOKEN || '' }}
+          INSTAGRAM_USER_ID: ${{ github.event_name == 'workflow_dispatch' && vars.INSTAGRAM_USER_ID || '' }}
+          META_API_VERSION: ${{ github.event_name == 'workflow_dispatch' && vars.META_API_VERSION || '' }}
+          FACEBOOK_PAGE_ACCESS_TOKEN: ${{ github.event_name == 'workflow_dispatch' && secrets.FACEBOOK_PAGE_ACCESS_TOKEN || '' }}
+          FACEBOOK_PAGE_ID: ${{ github.event_name == 'workflow_dispatch' && vars.FACEBOOK_PAGE_ID || '' }}
+          TIKTOK_ACCESS_TOKEN: ${{ github.event_name == 'workflow_dispatch' && secrets.TIKTOK_ACCESS_TOKEN || '' }}
+          LINKEDIN_ACCESS_TOKEN: ${{ github.event_name == 'workflow_dispatch' && secrets.LINKEDIN_ACCESS_TOKEN || '' }}
+          LINKEDIN_ORGANIZATION_ID: ${{ github.event_name == 'workflow_dispatch' && vars.LINKEDIN_ORGANIZATION_ID || '' }}
+          LINKEDIN_API_VERSION: ${{ github.event_name == 'workflow_dispatch' && vars.LINKEDIN_API_VERSION || '' }}
       - name: Validate output and publish run summary
         run: node scripts/social-validate.mjs
       - name: Upload dashboard and evidence records
@@ -50,6 +60,8 @@ jobs:
         with:
           name: social-source-pilot-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
+            docs/social/public-acceptance.json
+            docs/social/CURRENT-SETUP.md
             docs/social/index.html
             docs/social/pilot.json
             docs/social/SOURCES.md

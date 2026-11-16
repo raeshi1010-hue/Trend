@@ -1,0 +1,276 @@
+{
+  "observedAt": "2026-11-16T05:13:32.546Z",
+  "note": "本机公开路径实测；不覆盖既有pilot快照。页面无结构化数据不代表没有内容。",
+  "results": [
+    {
+      "name": "Houzz",
+      "url": "https://www.houzz.com/discussions",
+      "status": "公开来源受阻：access_restricted",
+      "items": [],
+      "accessAttempts": [
+        {
+          "url": "https://www.houzz.com/discussions",
+          "attempt": 1,
+          "observedAt": "2026-11-16T05:13:11.465Z",
+          "durationMs": 1588,
+          "httpStatus": 403,
+          "kind": "access_restricted"
+        }
+      ],
+      "coverage": "行业公开内容"
+    },
+    {
+      "name": "Screwfix Community",
+      "url": "https://community.screwfix.com/forums/builders-talk.23/index.rss",
+      "status": "公开来源受阻：certificate_error",
+      "items": [],
+      "accessAttempts": [
+        {
+          "url": "https://community.screwfix.com/forums/builders-talk.23/index.rss",
+          "attempt": 1,
+          "observedAt": "2026-11-16T05:13:11.520Z",
+          "durationMs": 1490,
+          "kind": "certificate_error",
+          "errorCode": "UNABLE_TO_VERIFY_LEAF_SIGNATURE"
+        }
+      ],
+      "coverage": "行业公开内容"
+    },
+    {
+      "name": "ArchDaily",
+      "url": "https://www.archdaily.com/feed/",
+      "status": "公开来源受阻：request_failed",
+      "items": [],
+      "accessAttempts": [
+        {
+          "url": "https://www.archdaily.com/feed/",
+          "attempt": 1,
+          "observedAt": "2026-11-16T05:13:11.521Z",
+          "durationMs": 2609,
+          "kind": "request_failed",
+          "errorCode": "TypeError"
+        }
+      ],
+      "coverage": "行业公开内容"
+    },
+    {
+      "name": "The Construction Index",
+      "url": "https://www.theconstructionindex.co.uk/feeds/news.xml",
+      "observedAt": "2026-11-16T05:13:11.522Z",
+      "status": "公开结构化候选（非热榜）",
+      "items": [
+        {
+          "title": "Caterpillar challenges UK excavator tariffs",
+          "url": "https://www.theconstructionindex.co.uk/news/view/caterpillar-challenges-uk-excavator-import-tariffs",
+          "author": "The Construction Index",
+          "publishedAt": "Sat, 14 Nov 2026 13:36:00 +0000",
+          "metrics": {},
+          "market": "市场未确认",
+          "tags": null,
+          "bgm": null,
+          "coverage": "行业公开内容",
+          "sourceKind": "public_structured_sample",
+          "detail": {
+            "status": "公开结构化候选；首帖、市场和热度仍待核验"
+          }
+        },
+        {
+          "title": "LHC appoints 155 to £2.34bn framework",
+          "url": "https://www.theconstructionindex.co.uk/news/view/lhc-appoints-155-to-234bn-framework",
+          "author": "The Construction Index",
+          "publishedAt": "Fri, 13 Nov 2026 07:38:00 +0000",
+          "metrics": {},
+          "market": "市场未确认",
+          "tags": null,
+          "bgm": null,
+          "coverage": "行业公开内容",
+          "sourceKind": "public_structured_sample",
+          "detail": {
+            "status": "公开结构化候选；首帖、市场和热度仍待核验"
+          }
+        },
+        {
+          "title": "JCB expands heavy loader lineup",
+          "url": "https://www.theconstructionindex.co.uk/news/view/jcb-expands-heavy-loader-lineup",
+          "author": "The Construction Index",
+          "publishedAt": "Wed, 11 Nov 2026 13:05:00 +0000",
+          "metrics": {},
+          "market": "市场未确认",
+          "tags": null,
+          "bgm": null,
+          "coverage": "行业公开内容",
+          "sourceKind": "public_structured_sample",
+          "detail": {
+            "status": "公开结构化候选；首帖、市场和热度仍待核验"
+          }
+        },
+        {
+          "title": "Out of this world",
+          "url": "https://www.theconstructionindex.co.uk/news/view/out-of-this-world",
+          "author": "The Construction Index",
+          "publishedAt": "Sat, 14 Nov 2026 13:02:00 +0000",
+          "metrics": {},
+          "market": "市场未确认",
+          "tags": null,
+          "bgm": null,
+          "coverage": "行业公开内容",
+          "sourceKind": "public_structured_sample",
+          "detail": {
+            "status": "公开结构化候选；首帖、市场和热度仍待核验"
+          }
+        },
+        {
+          "title": "Bell secures ADT agreement with Hitachi",
+          "url": "https://www.theconstructionindex.co.uk/news/view/bell-secures-adt-agreement-with-hitachi",
+          "author": "The Construction Index",
+          "publishedAt": "Sat, 14 Nov 2026 08:47:00 +0000",
+          "metrics": {},
+          "market": "市场未确认",
+          "tags": null,
+          "bgm": null,
+          "coverage": "行业公开内容",
+          "sourceKind": "public_structured_sample",
+          "detail": {
+            "status": "公开结构化候选；首帖、市场和热度仍待核验"
+          }
+        },
+        {
+          "title": "UK demand lifts Wacker Neuson revenue",
+          "url": "https://www.theconstructionindex.co.uk/news/view/uk-demand-lifts-wacker-neuson-revenue",
+          "author": "The Construction Index",
+          "publishedAt": "Fri, 13 Nov 2026 14:11:00 +0000",
+          "metrics": {},
+          "market": "市场未确认",
+          "tags": null,
+          "bgm": null,
+          "coverage": "行业公开内容",
+          "sourceKind": "public_structured_sample",
+          "detail": {
+            "status": "公开结构化候选；首帖、市场和热度仍待核验"
+          }
+        },
+        {
+          "title": "The global plant mashup",
+          "url": "https://www.theconstructionindex.co.uk/news/view/the-global-plant-mashup",
+          "author": "The Construction Index",
+          "publishedAt": "Fri, 13 Nov 2026 12:30:00 +0000",
+          "metrics": {},
+          "market": "市场未确认",
+          "tags": null,
+          "bgm": null,
+          "coverage": "行业公开内容",
+          "sourceKind": "public_structured_sample",
+          "detail": {
+            "status": "公开结构化候选；首帖、市场和热度仍待核验"
+          }
+        },
+        {
+          "title": "Bromford and Keon to deliver Birmingham homes",
+          "url": "https://www.theconstructionindex.co.uk/news/view/bromford-and-keon-to-deliver-birmingham-homes",
+          "author": "The Construction Index",
+          "publishedAt": "Fri, 13 Nov 2026 08:48:00 +0000",
+          "metrics": {},
+          "market": "市场未确认",
+          "tags": null,
+          "bgm": null,
+          "coverage": "行业公开内容",
+          "sourceKind": "public_structured_sample",
+          "detail": {
+            "status": "公开结构化候选；首帖、市场和热度仍待核验"
+          }
+        },
+        {
+          "title": "Early engagement invited for Somerset Epic Campus",
+          "url": "https://www.theconstructionindex.co.uk/news/view/early-engagement-invited-for-somerset-epic-campus",
+          "author": "The Construction Index",
+          "publishedAt": "Fri, 13 Nov 2026 08:41:00 +0000",
+          "metrics": {},
+          "market": "市场未确认",
+          "tags": null,
+          "bgm": null,
+          "coverage": "行业公开内容",
+          "sourceKind": "public_structured_sample",
+          "detail": {
+            "status": "公开结构化候选；首帖、市场和热度仍待核验"
+          }
+        },
+        {
+          "title": "AMS on level ground with Trimble",
+          "url": "https://www.theconstructionindex.co.uk/news/view/ams-on-level-ground-with-trimble",
+          "author": "The Construction Index",
+          "publishedAt": "Fri, 13 Nov 2026 08:33:00 +0000",
+          "metrics": {},
+          "market": "市场未确认",
+          "tags": null,
+          "bgm": null,
+          "coverage": "行业公开内容",
+          "sourceKind": "public_structured_sample",
+          "detail": {
+            "status": "公开结构化候选；首帖、市场和热度仍待核验"
+          }
+        }
+      ],
+      "accessAttempts": [
+        {
+          "url": "https://www.theconstructionindex.co.uk/feeds/news.xml",
+          "attempt": 1,
+          "observedAt": "2026-11-16T05:13:11.522Z",
+          "durationMs": 2851,
+          "httpStatus": 200,
+          "kind": "success"
+        }
+      ],
+      "coverage": "行业公开内容"
+    },
+    {
+      "name": "Behance",
+      "url": "https://www.behance.net/galleries/architecture",
+      "status": "公开来源受阻：temporary_network_error",
+      "items": [],
+      "accessAttempts": [
+        {
+          "url": "https://www.behance.net/galleries/architecture",
+          "attempt": 1,
+          "observedAt": "2026-11-16T05:13:11.523Z",
+          "durationMs": 10007,
+          "kind": "temporary_network_error",
+          "errorCode": "TimeoutError"
+        },
+        {
+          "url": "https://www.behance.net/galleries/architecture",
+          "attempt": 2,
+          "observedAt": "2026-11-16T05:13:22.542Z",
+          "durationMs": 10003,
+          "kind": "temporary_network_error",
+          "errorCode": "TimeoutError"
+        }
+      ],
+      "coverage": "行业公开内容"
+    },
+    {
+      "name": "Pinterest",
+      "url": "https://trends.pinterest.com/",
+      "status": "公开来源受阻：temporary_network_error",
+      "items": [],
+      "accessAttempts": [
+        {
+          "url": "https://trends.pinterest.com/",
+          "attempt": 1,
+          "observedAt": "2026-11-16T05:13:11.523Z",
+          "durationMs": 10008,
+          "kind": "temporary_network_error",
+          "errorCode": "TimeoutError"
+        },
+        {
+          "url": "https://trends.pinterest.com/",
+          "attempt": 2,
+          "observedAt": "2026-11-16T05:13:22.544Z",
+          "durationMs": 10001,
+          "kind": "temporary_network_error",
+          "errorCode": "TimeoutError"
+        }
+      ],
+      "coverage": "行业公开内容"
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+> 当前本地开发状态与新增平台配置见 [CURRENT-SETUP.md](CURRENT-SETUP.md)。下文保留原master阶段说明，其中“适配器未实现”等内容属于此前状态。
+
 # 全平台集中配置指引
 
 维护入口：config/social-platforms.json。运行 `node scripts/social-config.mjs` 生成configuration.html和configuration.json；只输出配置项是否存在，不输出凭据值，不测试令牌有效性。PR不注入Secrets，所以PR报告不能用来判断仓库Secrets是否存在。
