@@ -1,4 +1,6 @@
-# 社媒与行业论坛：首轮试采
+# 社媒与行业论坛：来源规划与首轮试采
+
+> 最新GitHub环境复测见 [GITHUB-PILOT.md](GITHUB-PILOT.md)，本文件表格中的本轮指早期本机观察；pilot.json和index.html现已更新为GitHub第二轮实测。
 
 本模块只在 raeshi1010-hue/Trend 仓库内维护，不依赖其他聊天或本机定时任务。运行 `node scripts/social-pilot.mjs` 可重新生成本目录的 `pilot.json` 和 `index.html`。需要 Node.js 22+，不需要 npm 依赖。不默认启用定时或发布公网。
 
