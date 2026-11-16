@@ -29,12 +29,24 @@ export function forumCategory(html,url){
    try{const u=new URL(value,url);if(value&&u.origin===origin&&/^\/forums\/[^/]+\.\d+\/$/.test(u.pathname))links.push(u.href);}catch{}
   }
  }
+ for(const crumb of breadcrumbLinks(html)){
+  try{const u=new URL(crumb.url,url);if(u.origin===origin&&/^\/forums\/[^/]+\.\d+\/?$/.test(u.pathname))links.push(u.href);}catch{}
+ }
  return links.at(-1)||null;
+}
+export function breadcrumbLinks(html){
+ const links=[];
+ // XenForo's semantic breadcrumb list only; never search the entire page for country names.
+ for(const list of html.matchAll(/<ul\b[^>]*class=["'][^"']*p-breadcrumbs[^"']*["'][^>]*>([\s\S]*?)<\/ul>/gi)){
+  for(const a of list[1].matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi))links.push({url:a[1].replaceAll('&amp;','&'),name:a[2].replace(/<[^>]*>/g,'').trim()});
+ }
+ return links;
 }
 export function locationEvidence(title,html,url){
  const places=[['Manchester','欧洲',/united kingdom|uk\b|manchester/i],['Dubai','中东',/united arab emirates|uae\b|dubai/i],['Riyadh','中东',/saudi arabia|riyadh/i],['London','欧洲',/united kingdom|uk\b|london/i],['Paris','欧洲',/france|paris/i],['Berlin','欧洲',/germany|berlin/i]];
  const p=places.find(([name])=>new RegExp('\\b'+name+'\\b','i').test(title||''));
  if(!p)return {status:'未确认',place:null};
  const crumbs=linkedData(html).filter(n=>[n['@type']].flat().includes('BreadcrumbList')).flatMap(n=>(n.itemListElement||[]).map(e=>e.name||e.item?.name||'')).filter(Boolean);
+ crumbs.push(...breadcrumbLinks(html).map(c=>c.name).filter(Boolean));
  return {place:p[0],projectRegionHint:p[1],status:crumbs.some(c=>p[2].test(c))?'原帖标题与来源分区支持':'仅标题提及，待核验',evidence:{url,title,breadcrumbs:crumbs},audienceMarket:'未确认'};
 }

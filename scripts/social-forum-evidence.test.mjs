@@ -19,3 +19,8 @@ test('project country evidence is limited to breadcrumbs',()=>{
  const html=ld({'@type':'BreadcrumbList',itemListElement:[{name:'United Kingdom',item:'https://f.test/forums/uk.1/'}]});
  const result=locationEvidence('MANCHESTER | Tower',html,'https://f.test/threads/t.1/');assert.equal(result.status,'原帖标题与来源分区支持');assert.equal(result.audienceMarket,'未确认');
 });
+test('DOM breadcrumb supports category and project geography without reading profile locations',()=>{
+ const html='<div>Author location France</div><ul class="p-breadcrumbs"><li><a href="/forums/uk.7/">United Kingdom</a></li></ul>';
+ assert.equal(forumCategory(html,'https://f.test/threads/t.1/'),'https://f.test/forums/uk.7/');
+ assert.equal(locationEvidence('Manchester tower',html,'https://f.test/threads/t.1/').status,'原帖标题与来源分区支持');
+});
