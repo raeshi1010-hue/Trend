@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {enrichForum,youtube,reddit,parseForumListing} from './social-adapters.mjs';
 import {xSearch,forumSample,enhanceDashboard,stableForumSource} from './social-expansion.mjs';
+import {assessItem} from './social-quality.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const out=path.join(root,'docs/social');
 const sources=[
@@ -53,6 +54,7 @@ for(const source of attempts)if(source.name==='DIYnot'){
  }catch{source.listingStatus='主题列表指标未取得';}
  for(let i=0;i<source.items.length;i++)source.items[i]=await enrichForum(source.items[i]);
 }
+for(const source of attempts)for(const item of source.items)item.quality=assessItem(item);
 await fs.mkdir(out,{recursive:true});
 const result={observedAt:new Date().toISOString(),runtime:{platform:process.platform,node:process.version,githubActions:process.env.GITHUB_ACTIONS==='true',runId:process.env.GITHUB_RUN_ID||null,commit:process.env.GITHUB_SHA||null},scope:'公开路径一次性试采；页面可达不代表原帖、市场和热度核验通过',attempts};
 await fs.writeFile(path.join(out,'pilot.json'),JSON.stringify(result,null,2));

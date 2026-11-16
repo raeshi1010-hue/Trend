@@ -1,6 +1,7 @@
 import {jsonRequest,parseForum} from './social-adapters.mjs';
 import {publicText} from './social-public-http.mjs';
 import {threadStatistics,forumCategory,locationEvidence} from './social-forum-evidence.mjs';
+import {assessItem,metricStructure} from './social-quality.mjs';
 export async function xSearch(env=process.env,request=fetch){
  if(env.X_API_ENABLED!=='true')return {status:'X接口已实现，待确认访问资格与调用费用',items:[]};
  if(!env.X_BEARER_TOKEN)return {status:'未配置 X_BEARER_TOKEN',items:[]};
@@ -39,7 +40,7 @@ export async function forumSample(source,html,request=fetch){
    if(category&&!Object.keys(item.metrics).length){
     if(!categoryCache.has(category))categoryCache.set(category,await publicText(category,{request,timeoutMs:12000}));
     const listing=categoryCache.get(category);item.metricAttempts=listing.attempts;
-    if(listing.ok){const found=threadStatistics(listing.body,item.url);if(Object.keys(found).length){item.metrics=found;item.metricsSource=category;}}
+    if(listing.ok){item.metricEvidence={url:category,observedAt:listing.observedAt,structure:metricStructure(listing.body,item.url)};const found=threadStatistics(listing.body,item.url);if(Object.keys(found).length){item.metrics=found;item.metricsSource=category;}}
    }
    item.detail.metricsStatus=Object.keys(item.metrics).length?'帖子级指标已提取':'来源未提供可核验的帖子级指标';
   }catch{item.detail={status:'发现原帖链接，单帖访问失败'};}
@@ -70,10 +71,10 @@ export function enhanceDashboard(html,attempts){
   html=html.replace('<h2>'+esc(source.name)+'</h2>','<h2>'+esc(source.name)+'</h2>'+trace);
  }
  const items=attempts.flatMap(s=>s.items);let n=0;
- html=html.replaceAll('<section lang="und" dir="auto">',()=>{const i=items[n++];const market=['欧洲','北美','中东'].includes(i?.market)?i.market:'市场未确认';const place=i?.projectLocation;const info=place?.place?'<p>项目所在地线索：'+esc(place.place)+' · '+esc(place.status)+'。买家／受众市场仍未确认。</p>':'';return '<section lang="und" dir="auto" data-market="'+market+'" data-industry="'+classify(i?.title)+'">'+info;});
+ html=html.replaceAll('<section lang="und" dir="auto">',()=>{const i=items[n++],quality=assessItem(i);const market=['欧洲','北美','中东'].includes(i?.market)?i.market:'市场未确认';const place=i?.projectLocation;const info=place?.place?'<p>项目所在地线索：'+esc(place.place)+' · '+esc(place.status)+'。买家／受众市场仍未确认。</p>':'';return '<section lang="und" dir="auto" data-quality="'+quality.status+'" data-market="'+market+'" data-industry="'+classify(i?.title)+'"><p><strong>'+quality.status+'</strong> · '+esc(quality.gaps.join('；')||quality.note)+'</p>'+info;});
  const options=['全部行业','工程与使用端','上游资源端','流通渠道端','技术检测服务端','监管行业配套','终端散户','待分类'].map(v=>'<option>'+v+'</option>').join('');
- const controls='<div style="margin-bottom:16px"><label>市场 <select id="market-filter"><option>全部市场</option><option>市场未确认</option><option>欧洲</option><option>北美</option><option>中东</option></select></label> <label>行业关键词初筛 <select id="industry-filter">'+options+'</select></label><p>行业按标题关键词初筛，不代表已确认客户角色；当前市场均待核验。</p><p id="filter-count" aria-live="polite"></p></div>';
+ const controls='<div style="margin-bottom:16px"><label>内容状态 <select id="quality-filter"><option>全部状态</option><option>基础字段齐备</option><option>待核验线索</option></select></label> <label>市场 <select id="market-filter"><option>全部市场</option><option>市场未确认</option><option>欧洲</option><option>北美</option><option>中东</option></select></label> <label>行业关键词初筛 <select id="industry-filter">'+options+'</select></label><p>行业按标题关键词初筛，不代表已确认客户角色；基础字段齐备也不等于地区或热度已核验。</p><p id="filter-count" aria-live="polite"></p></div>';
  html=html.replace('<div id="sources"',controls+'<div id="sources"');
- const script=`<script>(()=>{const q=document.querySelector('#search'),m=document.querySelector('#market-filter'),r=document.querySelector('#industry-filter');function update(){let count=0;document.querySelectorAll('#sources article').forEach(a=>{const sections=[...a.querySelectorAll('section[data-industry]')];sections.forEach(s=>{s.hidden=(m.value!=='全部市场'&&m.value!==s.dataset.market)||(r.value!=='全部行业'&&s.dataset.industry!==r.value);if(!s.hidden)count++});a.hidden=!a.dataset.name.toLowerCase().includes(q.value.toLowerCase())||((r.value!=='全部行业'||m.value!=='全部市场')&&!sections.some(s=>!s.hidden))});document.querySelector('#filter-count').textContent='筛选后显示 '+[...document.querySelectorAll('#sources article:not([hidden]) section:not([hidden])')].length+' 条候选'};[q,m,r].forEach(e=>e.addEventListener(e===q?'input':'change',update));update()})();</script>`;
+ const script=`<script>(()=>{const q=document.querySelector('#search'),m=document.querySelector('#market-filter'),r=document.querySelector('#industry-filter'),k=document.querySelector('#quality-filter');function update(){let count=0;document.querySelectorAll('#sources article').forEach(a=>{const sections=[...a.querySelectorAll('section[data-industry]')];sections.forEach(s=>{s.hidden=(k.value!=='全部状态'&&k.value!==s.dataset.quality)||(m.value!=='全部市场'&&m.value!==s.dataset.market)||(r.value!=='全部行业'&&s.dataset.industry!==r.value);if(!s.hidden)count++});a.hidden=!a.dataset.name.toLowerCase().includes(q.value.toLowerCase())||((r.value!=='全部行业'||m.value!=='全部市场'||k.value!=='全部状态')&&!sections.some(s=>!s.hidden))});document.querySelector('#filter-count').textContent='筛选后显示 '+[...document.querySelectorAll('#sources article:not([hidden]) section:not([hidden])')].length+' 条候选'};[q,m,r,k].forEach(e=>e.addEventListener(e===q?'input':'change',update));update()})();</script>`;
  return html.replace('</body>',script+'</body>');
 }
