@@ -3,6 +3,7 @@ import {publicText} from './social-public-http.mjs';
 import {threadStatistics,forumCategory,locationEvidence,forumRow} from './social-forum-evidence.mjs';
 import {assessItem,metricStructure} from './social-quality.mjs';
 import {originalPost} from './social-original-post.mjs';
+import {presentDashboard} from './social-presentation.mjs';
 export async function xSearch(env=process.env,request=fetch){
  if(env.X_API_ENABLED!=='true')return {status:'X接口已实现，待确认访问资格与调用费用',items:[]};
  if(!env.X_BEARER_TOKEN)return {status:'未配置 X_BEARER_TOKEN',items:[]};
@@ -73,6 +74,7 @@ export function classify(title){
  return rules.find(([,r])=>r.test(title||''))?.[0]||'待分类';
 }
 export function enhanceDashboard(html,attempts){
+ html=presentDashboard(html,attempts);
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  for(const source of attempts)if(source.accessAttempts?.length){
   const trace='<details><summary>公开路径尝试记录（'+source.accessAttempts.length+'次）</summary>'+source.accessAttempts.map(a=>'<p>'+esc(a.observedAt)+' · '+esc(a.url)+' · '+esc(a.httpStatus??a.errorCode??a.kind)+' · '+esc(a.kind)+' · '+esc(a.durationMs)+'ms</p>').join('')+'</details>';
