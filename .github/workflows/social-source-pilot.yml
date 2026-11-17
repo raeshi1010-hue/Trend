@@ -1,6 +1,11 @@
 name: Social source pilot
 
 on:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/social-source-pilot.yml'
+      - 'scripts/social-*.mjs'
   # UTC: daily 23:15 = next day 07:15 Asia/Shanghai; Friday 07:15 = 15:15.
   schedule:
     - cron: '15 23 * * *'
@@ -41,21 +46,21 @@ jobs:
           node scripts/social-config.mjs
           node scripts/social-public-acceptance.mjs
         env:
-          YOUTUBE_API_KEY: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && secrets.YOUTUBE_API_KEY || '' }}
-          REDDIT_ACCESS_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && secrets.REDDIT_ACCESS_TOKEN || '' }}
-          REDDIT_USER_AGENT: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && secrets.REDDIT_USER_AGENT || '' }}
-          REDDIT_API_APPROVED: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && vars.REDDIT_API_APPROVED || '' }}
-          X_BEARER_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && secrets.X_BEARER_TOKEN || '' }}
-          X_API_ENABLED: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && vars.X_API_ENABLED || '' }}
-          INSTAGRAM_ACCESS_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && secrets.INSTAGRAM_ACCESS_TOKEN || '' }}
-          INSTAGRAM_USER_ID: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && vars.INSTAGRAM_USER_ID || '' }}
-          META_API_VERSION: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && vars.META_API_VERSION || '' }}
-          FACEBOOK_PAGE_ACCESS_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && secrets.FACEBOOK_PAGE_ACCESS_TOKEN || '' }}
-          FACEBOOK_PAGE_ID: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && vars.FACEBOOK_PAGE_ID || '' }}
-          TIKTOK_ACCESS_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && secrets.TIKTOK_ACCESS_TOKEN || '' }}
-          LINKEDIN_ACCESS_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && secrets.LINKEDIN_ACCESS_TOKEN || '' }}
-          LINKEDIN_ORGANIZATION_ID: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && vars.LINKEDIN_ORGANIZATION_ID || '' }}
-          LINKEDIN_API_VERSION: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && vars.LINKEDIN_API_VERSION || '' }}
+          YOUTUBE_API_KEY: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && secrets.YOUTUBE_API_KEY || '' }}
+          REDDIT_ACCESS_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && secrets.REDDIT_ACCESS_TOKEN || '' }}
+          REDDIT_USER_AGENT: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && secrets.REDDIT_USER_AGENT || '' }}
+          REDDIT_API_APPROVED: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && vars.REDDIT_API_APPROVED || '' }}
+          X_BEARER_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && secrets.X_BEARER_TOKEN || '' }}
+          X_API_ENABLED: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && vars.X_API_ENABLED || '' }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && secrets.INSTAGRAM_ACCESS_TOKEN || '' }}
+          INSTAGRAM_USER_ID: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && vars.INSTAGRAM_USER_ID || '' }}
+          META_API_VERSION: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && vars.META_API_VERSION || '' }}
+          FACEBOOK_PAGE_ACCESS_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && secrets.FACEBOOK_PAGE_ACCESS_TOKEN || '' }}
+          FACEBOOK_PAGE_ID: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && vars.FACEBOOK_PAGE_ID || '' }}
+          TIKTOK_ACCESS_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && secrets.TIKTOK_ACCESS_TOKEN || '' }}
+          LINKEDIN_ACCESS_TOKEN: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && secrets.LINKEDIN_ACCESS_TOKEN || '' }}
+          LINKEDIN_ORGANIZATION_ID: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && vars.LINKEDIN_ORGANIZATION_ID || '' }}
+          LINKEDIN_API_VERSION: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push') && vars.LINKEDIN_API_VERSION || '' }}
       - name: Validate output and publish run summary
         run: node scripts/social-validate.mjs
       - name: Generate dated daily and weekly deliveries
