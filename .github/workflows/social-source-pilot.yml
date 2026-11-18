@@ -116,3 +116,5 @@ jobs:
       - name: Publish daily and weekly report website
         id: deployment
         uses: actions/deploy-pages@v4
+
+# User-requested fresh collection: 2026-11-18 13:30 Asia/Shanghai
