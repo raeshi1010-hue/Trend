@@ -10,7 +10,7 @@ assert.equal(new Set(data.attempts.map(s=>s.name)).size,12);
 for(const source of data.attempts){
  assert(Number.isFinite(Date.parse(source.observedAt)),source.name+' missing observation time');
  assert(Array.isArray(source.items));
- assert(source.items.length<=10);
+ assert(source.items.length<=(source.name==='YouTube'?240:20));
  assert(html.includes(source.name.replace(/&/g,'&amp;')),source.name+' missing in dashboard');
  for(const item of source.items){
   assert(item.title?.trim(),'Empty candidate title');

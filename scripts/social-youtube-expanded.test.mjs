@@ -1,0 +1,8 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {youtubeExpanded} from './social-youtube-expanded.mjs';
+const now=Date.parse('2026-11-18T08:00:00Z');
+test('expanded discovery covers all scopes, bounded pagination, dedup, exact date and no market inference',async()=>{
+ let calls=0;const req=async raw=>{calls++;const u=new URL(raw);if(u.pathname.endsWith('/search')){assert.equal(u.searchParams.get('maxResults'),'20');return {ok:true,json:async()=>({items:[{id:{videoId:u.searchParams.has('pageToken')?'bbbbbbbbbbb':'aaaaaaaaaaa'}}],nextPageToken:'same'})};}return {ok:true,json:async()=>({items:[{id:'aaaaaaaaaaa',snippet:{title:'A',channelTitle:'C',publishedAt:'2026-11-17T00:00:00Z'},statistics:{viewCount:'12'}},{id:'bbbbbbbbbbb',snippet:{title:'B',channelTitle:'C',publishedAt:'2020-01-01T00:00:00Z'},statistics:{}}]})};};
+ const r=await youtubeExpanded({YOUTUBE_API_KEY:'test'},req,{now});assert.equal(calls,13);assert.equal(r.queries.length,6);assert.deepEqual(new Set(r.queries.map(q=>q.region)),new Set(['欧洲','北美','中东']));assert(r.queries.every(q=>q.pages===2));assert.equal(r.items.length,1);assert.equal(r.items[0].market,'市场未确认');assert.equal(r.items[0].metrics.viewCount,12);assert.equal(r.items[0].bgm,null);
+});
+test('permission failure stops query fan-out without leaking credentials',async()=>{let n=0;const r=await youtubeExpanded({YOUTUBE_API_KEY:'sensitive'},async()=>{n++;return {ok:false,status:403}},{now});assert.equal(n,1);assert.equal(r.items.length,0);assert(!JSON.stringify(r).includes('sensitive'));});
+test('missing key makes no requests',async()=>{const r=await youtubeExpanded({},()=>{throw Error('unexpected')},{now});assert.equal(r.items.length,0)});

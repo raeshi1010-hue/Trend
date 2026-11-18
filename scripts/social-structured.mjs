@@ -10,7 +10,7 @@ export function structuredItems(body,source){
   for(const [k,x]of Object.entries(v))if(k!=='author'&&x&&typeof x==='object')walk(x);
  };
  for(const m of body.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi))try{walk(JSON.parse(m[1]));}catch{}
- return items.slice(0,10);
+ return items.slice(0,20);
 }
 export async function structuredSource(source,options={}){
  const read=await publicText(source.url,options);

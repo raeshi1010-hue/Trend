@@ -1,9 +1,10 @@
+import {youtubeExpanded as youtube} from './social-youtube-expanded.mjs';
 import {structuredSource} from './social-structured.mjs';
 import {accountSource} from './social-accounts.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {enrichForum,youtube,reddit,parseForumListing} from './social-adapters.mjs';
+import {enrichForum,reddit,parseForumListing} from './social-adapters.mjs';
 import {xSearch,forumSample,enhanceDashboard,stableForumSource} from './social-expansion.mjs';
 import {assessItem} from './social-quality.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
