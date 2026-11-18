@@ -37,7 +37,7 @@ export function buildDelivery(pilot,extra,{now=Date.now(),kind='daily'}={}){
    const market=markets.includes(item.market)&&item.marketVerification==='verified'&&item.marketBasis?item.market:'市场未确认';
    records.push({platform:source.name,title:item.title,url,author:item.author||null,publishedAt:new Date(published).toISOString(),observedAt:source.observedAt,market,marketBasis:market==='市场未确认'?null:item.marketBasis,metrics,tags:item.tags??null,bgm:item.bgm??null,sourceKind:item.sourceKind||'disclosed_sample',discoveryRegion:item.discoveryRegion||null,discoveryQuery:item.discoveryQuery||null,block:'行业线索',withinHotWindow:published>=window.hotStart,note:'本次样本不代表地区热榜；累计互动不代表增长',suggestion:'创作建议：围绕原帖主题制作材料选择或施工问题讲解；发布前核对技术参数，不推断采购意向。'});
   }
-  coverage.push({platform:source.name,status:source.status,observedAt:source.observedAt,stale:!fresh,raw:(source.items||[]).length,accepted:kept});
+  coverage.push({platform:source.name,status:source.status,observedAt:source.observedAt,stale:!fresh,raw:(source.items||[]).length,accepted:kept,queries:source.queries||null,detailError:source.detailError||null});
  }
  const matrix=markets.flatMap(market=>platforms.map(platform=>({market,platform,industryCount:records.filter(r=>r.market===market&&r.platform===platform).length,hotCount:0,status:'地区趋势与热度证据尚未完成验证'})));
  return {schemaVersion:1,kind,generatedAt:new Date(now).toISOString(),day:window.day,window:{start:new Date(window.start).toISOString(),end:new Date(now).toISOString(),hotStart:new Date(window.hotStart).toISOString()},runId:pilot.runtime?.runId||null,commit:pilot.runtime?.commit||null,complete:false,records,coverage,matrix,excluded,note:'自动生成的候选交付，覆盖不足时也交付缺口；周报为本周窗口内的当次样本，非全周累计；未验证地区、热点、BGM及跨期增量。'};

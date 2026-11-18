@@ -1,11 +1,11 @@
 import {jsonRequest} from './social-adapters.mjs';
 export const discoveryScopes=[
- {region:'欧洲',q:'formwork scaffolding construction UK Germany France'},
- {region:'欧洲',q:'Baustelle Schalung Gerüst chantier coffrage échafaudage'},
- {region:'北美',q:'formwork scaffolding concrete construction USA Canada'},
- {region:'北美',q:'building materials installation contractor USA Canada'},
- {region:'中东',q:'formwork scaffolding construction Saudi Arabia UAE'},
- {region:'中东',q:'مواد بناء مقاولات سقالات السعودية الإمارات'}
+ {region:'欧洲',q:'scaffolding UK'},
+ {region:'欧洲',q:'Schalung|coffrage'},
+ {region:'北美',q:'concrete construction USA'},
+ {region:'北美',q:'construction Canada'},
+ {region:'中东',q:'construction materials Saudi Arabia'},
+ {region:'中东',q:'سقالات|شدات الإمارات'}
 ];
 export async function youtubeExpanded(env=process.env,request=fetch,{now=Date.now()}={}){
  if(!env.YOUTUBE_API_KEY)return {status:'未配置 YOUTUBE_API_KEY',items:[],queries:[]};
