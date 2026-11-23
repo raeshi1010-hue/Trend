@@ -100,6 +100,7 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
+          name: github-pages-${{ github.run_attempt }}
           path: docs/social/delivery
 
   deploy-reports:
@@ -116,5 +117,7 @@ jobs:
       - name: Publish daily and weekly report website
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
 
 # User-requested fresh collection: 2026-11-18 13:30 Asia/Shanghai
