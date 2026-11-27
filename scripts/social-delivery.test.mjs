@@ -8,7 +8,7 @@ test('delivery rejects stale observations, old posts, duplicates, future dates a
  const d=buildDelivery(source([item,item,{...item,url:'https://example.com/old',publishedAt:'2020-01-01'},{...item,url:'javascript:alert(1)'},{...item,url:'https://example.com/future',publishedAt:'2027-01-01'}]),{}, {now});
  assert.equal(d.records.length,1);assert.equal(d.excluded.length,4);
  assert.equal(buildDelivery(source([item],'2026-11-13'),{}, {now}).records.length,0);
- assert.deepEqual(d.records[0].metrics,{likes:0});assert.equal(d.records[0].market,'市场未确认');assert.equal(d.matrix.length,18);assert.equal(d.complete,false);
+ assert.deepEqual(d.records[0].metrics,{likes:0});assert.equal(d.records[0].market,'市场未确认');assert.equal(d.matrix.length,21);assert.equal(d.complete,false);
  assert.ok(renderDelivery(d).includes('&lt;unsafe&gt;'));assert.ok(!renderDelivery(d).includes('<unsafe>'));
 });
 test('weekly boundary uses Monday midnight Shanghai while daily keeps seven-day industry window',()=>{
